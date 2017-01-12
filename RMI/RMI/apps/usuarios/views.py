@@ -198,8 +198,8 @@ def reportes_view(request, id_mes):
 	ctx={'reporte_validar':reporte_validar, 'form':form, 'mes':mes}
 
 	return render(request, 'usuarios/reportes.html',ctx) 	
-
-
+######################################################################################
+'''
 def enero_view(request):
 	reporte_validar = Reporte_Mensual.objects.filter(mes= 'Enero',usuario__id= request.user.id )	
 	nombre_adjunto = ""	
@@ -463,7 +463,7 @@ def diciembre_view(request):
 	return render(request, 'usuarios/diciembre.html',ctx) 					
 #########################################################################################################
 
-
+'''
 ############################################### 	BORRAR REPORTES MESES    ############################################
 def del_reporte_view(request, id_reporte):
 	info = "inicializando"
@@ -480,7 +480,7 @@ def del_reporte_view(request, id_reporte):
 		info = "EL reporte no se puede eliminar"
 		#return render_to_response('home/productos.html', context_instance = RequestContext(request))
 		return HttpResponseRedirect('/index/')	
-
+'''
 def del_reporte_enero_view(request, id_reporte):
 	info = "inicializando"
 	try:
@@ -529,7 +529,8 @@ def del_reporte_abril_view(request, id_reporte):
 		#return render_to_response('home/productos.html', context_instance = RequestContext(request))
 		return HttpResponseRedirect('/abril/')							
 
-#################################################################################################################
+#############################################	CONSULTAR REPORTES POR MES #####################################################
+'''
 def consultar_view(request,id_mes):
 	meses = { '1':'ENERO', '2':'FEBRERO', '3':'MARZO', '4':'ABRIL', '5':'MAYO','6':'JUNIO','7':'JULIO','8':'AGOSTO','9':'SEPTIEMBRE','10':'OCTUBRE','11':'NOVIEMBRE','12':'DICIEMBRE' }	
 	mes = meses[id_mes]	
