@@ -20,14 +20,30 @@ class Reporte(forms.ModelForm):
 		fields = '__all__'
 		exclude = ['mes','usuario']
 
-class UserForm(forms.ModelForm):
+class UserForm(forms.ModelForm):	
+
 	first_name = forms.CharField(label="Nombres",widget=forms.TextInput())
 	last_name = forms.CharField(label="Apellidos",widget=forms.TextInput())	
-	password = forms.CharField(label="Password",widget=forms.PasswordInput(render_value=False))
+	#password = forms.CharField(label="Password",widget=forms.PasswordInput(render_value=False))
 
 	class Meta:
 		model = User
-		fields = ['email']		
+		fields = ['first_name','last_name','email']
+			
+
+class AdminUserForm(forms.ModelForm):
+
+	class Meta:
+		model = User
+		fields = ['first_name','last_name','username','email']
+
+	first_name = forms.CharField(label="Nombres",widget=forms.TextInput())
+	last_name = forms.CharField(label="Apellidos",widget=forms.TextInput())
+	username = forms.CharField(label="Cedula",widget=forms.TextInput())
+	email    = forms.EmailField(label="Correo Electronico",widget=forms.TextInput())
+	#password = forms.CharField(label="Password",widget=forms.PasswordInput(render_value=False))
+
+	
 
 class RegisterForm(forms.Form):
 	first_name = forms.CharField(label="Nombres",widget=forms.TextInput())
@@ -43,7 +59,7 @@ class RegisterForm(forms.Form):
 			u = User.objects.get(username=username)
 		except User.DoesNotExist:
 			return username 
-		raise forms.ValidationError('Nombre de usuario ya existe')	
+		raise forms.ValidationError('Cedula ya registrada')	
 
 	def clean_email(self):
 		email = self.cleaned_data['email']
@@ -60,4 +76,23 @@ class RegisterForm(forms.Form):
 		if password_one == password_two:	
 			pass 
 		else:
-			raise forms.ValidationError('Password no coinciden')			
+			raise forms.ValidationError('Password no coinciden')
+
+class PasswordForm(forms.ModelForm):
+
+	class Meta:
+		model = User
+		fields = ['password']
+
+	password = forms.CharField(label="Nuevo Password",widget=forms.PasswordInput(render_value=False))
+	password_two = forms.CharField(label="Confirmar password",widget=forms.PasswordInput(render_value=False))	
+		
+	
+	def clean_password_two(self):
+		password = self.cleaned_data['password']			
+		password_two = self.cleaned_data['password_two']
+
+		if password == password_two:	
+			pass 
+		else:
+			raise forms.ValidationError('Password no coinciden')									

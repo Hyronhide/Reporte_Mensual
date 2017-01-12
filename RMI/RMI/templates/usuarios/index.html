@@ -5,38 +5,45 @@
 {% endblock  %}
 
 {% block content %}
-	<div class="row content-header">
-	<div class="container">
-      <div  id="contenedor" class="col s12 m12 l12">
+	
         <div id="car" class="card z-depth-3 hoverable" >
         	{% if user.is_staff %}
         		<h5 id="cn" align="center "><p>Bienvenido Administrador(a) {{usuario.first_name}} {{usuario.last_name}}, seleccione un mes para consultar reportes ingresados</p></h5>
 				<div class="divider"></div><br>
 				<center>
-					<a class="btn" href="{% url 'vista_consultar_enero' %}" title="">Enero</a>
-					<a class="btn" href="{% url 'vista_febrero' %}" title="">Febrero</a>
-					<a class="btn" href="{% url 'vista_marzo' %}" title="">Marzo</a>
-					<a class="btn" href="{% url 'vista_abril' %}" title="">Abril</a>
+					<a class="btn" href="/consultar/1" title="">Enero</a>
+					<a class="btn" href="/consultar/2" title="">Febrero</a>
+					<a class="btn" href="/consultar/3" title="">Marzo</a>
+					<a class="btn" href="/consultar/4" title="">Abril</a>
+					<a class="btn" href="/consultar/5" title="">Mayo</a>
+					<a class="btn" href="/consultar/6" title="">Junio</a>
+					<a class="btn" href="/consultar/7" title="">Julio</a>
+					<br><br>
+					<a class="btn" href="/consultar/8" title="">Agosto</a>
+					<a class="btn" href="/consultar/9" title="">Septiembre</a>
+					<a class="btn" href="/consultar/10" title="">Octubre</a>
+					<a class="btn" href="/consultar/11" title="">Noviembre</a>
+					<a class="btn" href="/consultar/12" title="">Diciembre</a>
 				</center>			
         	{% else %}
         		<h5 id="cn" align="center "><p>Bienvenido(a) {{usuario.first_name}} {{usuario.last_name}},     seleccione un mes para ingrear el reporte</p></h5>
 				<div class="divider"></div><br>
 				<center>
-					<a class="btn" href="{% url 'vista_enero' %}" title="">Enero</a>
-					<a class="btn" href="{% url 'vista_febrero' %}" title="">Febrero</a>
-					<a class="btn" href="{% url 'vista_marzo' %}" title="">Marzo</a>
-					<a class="btn" href="{% url 'vista_abril' %}" title="">Abril</a>
+					<a class="btn" href="/reportes/1" title="">Enero</a>
+					<a class="btn" href="/reportes/2" title="">Febrero</a>
+					<a class="btn" href="/reportes/3" title="">Marzo</a>
+					<a class="btn" href="/reportes/4" title="">Abril</a>
+					<a class="btn" href="/reportes/5" title="">Mayo</a>
+					<a class="btn" href="/reportes/6" title="">Junio</a>
+					<a class="btn" href="/reportes/7" title="">Julio</a>
+					<br><br>
+					<a class="btn" href="/reportes/8" title="">Agosto</a>
+					<a class="btn" href="/reportes/9" title="">Septiembre</a>
+					<a class="btn" href="/reportes/10" title="">Octubre</a>
+					<a class="btn" href="/reportes/11" title="">Noviembre</a>
+					<a class="btn" href="/reportes/12" title="">Diciembre</a>
 				</center>		
-        	{% endif %}
-					
-		</div>
-	</div>
-</div>
-</div>
+        	{% endif %}					
+		</div>	
 
-
-
-
-	
-	
 {% endblock  %}

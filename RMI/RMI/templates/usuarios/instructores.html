@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block title %}
+	Reporte Mensual Instructor
+{% endblock  %}
+
+{% block content %}
+<div align="center">
+	<div id="car" class="card z-depth-3 hoverable" >
+	<h5 id="cn" align="center "><p>INSTRUCTORES</p></h5>
+	<div class="divider"></div><br>
+		{% if instructores %}						
+				<!--<li> Tipo de pqrs:{{ p.tipo_pqrs}}; Mensaje: {{ p.mensaje}}</li>-->
+				<table class="col s12 bordered responsive-table">
+					<theader>
+						<tr>
+							<th>Nombre</th>										
+							<th>Cedula</th>
+							<th>Correo</th>
+							<th></th>
+							<th></th>											
+						</tr>
+					</theader>					
+					<tbody>
+						{% for i in instructores %}
+						<tr>
+							<td>{{ i.first_name }} {{ i.last_name }}</td>				
+							<td>{{ i.username }}</td>	
+							<td>{{ i.email }}</td>									
+							<td><a href="/admin_edit_user/{{i.id}}" title="">(Editar)</a></td>	
+							<td><a href="/admin_edit_password/{{i.id}}" title="">(Cambiar Clave)</a></td>					
+						</tr>
+						{% endfor %}			
+					</tbody>							
+				</table>
+								
+		{% else %}
+			<center><p><h5>No existen instrucores registrados</h5></p></center>				
+		{% endif %}		
+	</div>	
+</div>
+		
+        		
+	  	
+	
+{% endblock  %}

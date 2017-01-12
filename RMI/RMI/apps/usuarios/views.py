@@ -41,28 +41,110 @@ def user_view(request):
 
 def edit_user_view(request):
 	info = ""	
+	info_enviado = False
 	us = User.objects.get(id = request.user.id)
 	if request.method == "POST":
 		formulario = UserForm(request.POST, request.FILES, instance = us)		
 		if formulario.is_valid():
-			clave = formulario.cleaned_data['password']
-			formulario.password = us.set_password(clave)
+			info_enviado = True
+			#clave = formulario.cleaned_data['password']
+			#formulario.password = us.set_password(clave)
 			edit_user = formulario.save(commit = False)
-			formulario.save_m2m()
-			edit_user.status = True
+			#formulario.save_m2m()
+			#edit_user.status = True
 			edit_user.save()
 			info = "Guardado Satisfactoriamente"
 			#return HttpResponseRedirect ('/')
-			return HttpResponseRedirect ('/')
+			#return HttpResponseRedirect ('/user/')
 	else:
 		formulario = UserForm(instance = us)
-	ctx = {'form':formulario, 'informacion':info}	
-	return render_to_response('usuarios/edit_user.html',ctx,context_instance = RequestContext(request))	
+	ctx = {'form':formulario, 'informacion':info, 'info_enviado':info_enviado}	
+	return render_to_response('usuarios/edit_user.html',ctx,context_instance = RequestContext(request))
+
+def edit_password_view(request):
+	info = ""	
+	info_enviado = False
+	us = User.objects.get(id = request.user.id)
+	if request.method == "POST":
+		formulario = PasswordForm(request.POST, request.FILES, instance = us)		
+		if formulario.is_valid():
+			info_enviado = True
+			clave = formulario.cleaned_data['password']
+			usu= us.username #guarda informacion ingresada del formulario
+			pas= clave #guarda informacion ingresada del formulario
+			formulario.password = us.set_password(clave)
+			edit_user = formulario.save(commit = False)			
+			#formulario.save_m2m()
+			#edit_user.status = True
+			edit_user.save()
+			info = "Guardado Satisfactoriamente"
+			usuario = authenticate(username = usu,password = pas)#asigna la autenticacion del usuario
+			if usuario is not None and usuario.is_active:#si el usuario no es nulo y esta activo
+				login(request,usuario)#se loguea al sistema con la informacion de usuario
+				return HttpResponseRedirect('/password_guardado_user/')#redirigimos a la pagina principal
+			#return HttpResponseRedirect ('/')
+			#return HttpResponseRedirect ('/index/')
+	else:
+		formulario = PasswordForm(instance = us)
+	ctx = {'form':formulario, 'informacion':info, 'info_enviado':info_enviado}	
+	return render_to_response('usuarios/edit_password.html',ctx,context_instance = RequestContext(request))
+
+def admin_edit_password_view(request,id_user):
+	info = ""	
+	info_enviado = False
+	us = User.objects.get(id = id_user)
+	if request.method == "POST":
+		formulario = PasswordForm(request.POST, request.FILES, instance = us)		
+		if formulario.is_valid():
+			info_enviado = True
+			clave = formulario.cleaned_data['password']
+			formulario.password = us.set_password(clave)
+			edit_user = formulario.save(commit = False)
+			#formulario.save_m2m()
+			#edit_user.status = True
+			edit_user.save()
+			info = "Guardado Satisfactoriamente"
+			#return HttpResponseRedirect ('/')
+			return HttpResponseRedirect ('/password_guardado_admin/')
+	else:
+		formulario = PasswordForm(instance = us)
+	ctx = {'form':formulario, 'informacion':info, 'info_enviado':info_enviado}	
+	return render_to_response('usuarios/admin_edit_password.html',ctx,context_instance = RequestContext(request))				
+
+def admin_edit_user_view(request,id_user):
+	info = ""	
+	info_enviado = False
+	us = User.objects.get(id = id_user)
+	if request.method == "POST":
+		formulario = AdminUserForm(request.POST, request.FILES, instance = us)		
+		if formulario.is_valid():
+			info_enviado = True
+			#clave = formulario.cleaned_data['password']
+			#formulario.password = us.set_password(clave)
+			edit_user = formulario.save(commit = False)			
+			#edit_user.status = True
+			edit_user.save()
+			info = "Guardado Satisfactoriamente"
+			#return HttpResponseRedirect ('/')
+			#return HttpResponseRedirect ('/instructores/')
+	else:
+		formulario = AdminUserForm(instance = us)
+	ctx = {'form':formulario, 'informacion':info, 'info_enviado':info_enviado}	
+	return render_to_response('usuarios/admin_edit_user.html',ctx,context_instance = RequestContext(request))		
 
 def index_view(request):
 	usuario = User.objects.get(id= request.user.id)
 	ctx={'usuario':usuario}
-	return render(request, 'usuarios/index.html',ctx) 	 
+	return render(request, 'usuarios/index.html',ctx) 
+
+def password_guardado_user_view(request):
+	
+	return render(request, 'usuarios/password_guardado_user.html') 	
+
+def password_guardado_admin_view(request):
+	
+	return render(request, 'usuarios/password_guardado_admin.html') 		 
+
 
 def administrador_view(request):	
 	usuario = User.objects.get(id= request.user.id)
@@ -87,9 +169,36 @@ def register_view(request):
 			ctx = {'form':form}
 			return render_to_response('usuarios/register.html',ctx,context_instance=RequestContext(request))
 	ctx = {'form':form}
-	return render_to_response('usuarios/register.html',ctx,context_instance=RequestContext(request))	 	
+	return render_to_response('usuarios/register.html',ctx,context_instance=RequestContext(request))
 
+def instructores_view(request):
+	instructores = User.objects.filter(is_staff=False)		 	
+	ctx={'instructores':instructores}
+	return render(request, 'usuarios/instructores.html',ctx) 	
 ########################### SUBIR REPORTES POR MESES ##################################################
+def reportes_view(request, id_mes):
+	meses = { '1':'ENERO', '2':'FEBRERO', '3':'MARZO', '4':'ABRIL', '5':'MAYO','6':'JUNIO','7':'JULIO','8':'AGOSTO','9':'SEPTIEMBRE','10':'OCTUBRE','11':'NOVIEMBRE','12':'DICIEMBRE' }	
+	mes = meses[id_mes]	
+	
+	reporte_validar = Reporte_Mensual.objects.filter(mes= mes,usuario__id= request.user.id )	
+	nombre_adjunto = ""	
+	info_enviado = False
+	if request.method == "POST":		
+		form = Reporte(request.POST, request.FILES)
+		if form.is_valid():
+			info_enviado = True
+			nombre_adjunto = form.cleaned_data['nombre_adjunto']											
+			reporte = form.save(commit = False)
+			reporte.usuario = request.user	
+			reporte.mes = mes					
+			reporte.save()					
+	else:
+		form = Reporte()
+
+	ctx={'reporte_validar':reporte_validar, 'form':form, 'mes':mes}
+
+	return render(request, 'usuarios/reportes.html',ctx) 	
+
 
 def enero_view(request):
 	reporte_validar = Reporte_Mensual.objects.filter(mes= 'Enero',usuario__id= request.user.id )	
@@ -356,6 +465,22 @@ def diciembre_view(request):
 
 
 ############################################### 	BORRAR REPORTES MESES    ############################################
+def del_reporte_view(request, id_reporte):
+	info = "inicializando"
+	try:
+		rep = Reporte_Mensual.objects.get(id = id_reporte)
+		mes = rep.mes
+		meses = { 'ENERO': '1', 'FEBRERO': '2', 'MARZO': '3', 'ABRIL':'4', 'MAYO':'5', 'JUNIO':'6', 'JULIO':'7', 'AGOSTO':'8', 'SEPTIEMBRE':'9', 'OCTUBRE':'10', 'NOVIEMBRE':'11', 'DICIEMBRE':'12' }	
+		mes_num = meses[mes]
+		print mes		
+		rep.delete()
+		info = "El reporte ha sido eliminado correctamente"
+		return HttpResponseRedirect('/reportes/%s'%(mes_num))
+	except:
+		info = "EL reporte no se puede eliminar"
+		#return render_to_response('home/productos.html', context_instance = RequestContext(request))
+		return HttpResponseRedirect('/index/')	
+
 def del_reporte_enero_view(request, id_reporte):
 	info = "inicializando"
 	try:
@@ -405,12 +530,15 @@ def del_reporte_abril_view(request, id_reporte):
 		return HttpResponseRedirect('/abril/')							
 
 #################################################################################################################
-def consultar_enero_view(request):
-	consultar_enero = Reporte_Mensual.objects.filter(mes='Enero')
-	tolal_reportes = consultar_enero.count
+def consultar_view(request,id_mes):
+	meses = { '1':'ENERO', '2':'FEBRERO', '3':'MARZO', '4':'ABRIL', '5':'MAYO','6':'JUNIO','7':'JULIO','8':'AGOSTO','9':'SEPTIEMBRE','10':'OCTUBRE','11':'NOVIEMBRE','12':'DICIEMBRE' }	
+	mes = meses[id_mes]	
+
+	consultar = Reporte_Mensual.objects.filter(mes=mes)
+	tolal_reportes = consultar.count
 	#tolal_reportes = 0
 	#for c in consultar_enero:
 	#	tolal_reportes=tolal_reportes+1
 
-	ctx = {'consultar_enero':consultar_enero, 'total_reportes':tolal_reportes}
-	return render(request, 'usuarios/consultar_enero.html',ctx) 
+	ctx = {'consultar':consultar, 'total_reportes':tolal_reportes, 'mes':mes}
+	return render(request, 'usuarios/consultar.html',ctx) 
