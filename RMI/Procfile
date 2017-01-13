@@ -1,1 +1,1 @@
-web: gunicorn solicitud.wsgi -b 0.0.0.0:$PORT
+web: gunicorn RMI.wsgi -b 0.0.0.0:$PORT
