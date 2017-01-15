@@ -20,6 +20,7 @@
 							<p><b>Fecha:</b> {{r.fecha}}</p>
 						</font>						
 						<br><div class="divider"></div>
+						<br>
 						<center>
 						<a class="btn" href="/del/reporte/{{r.id}}">Eliminar</a>
 						<a href="{% url 'vista_index' %}" class="btn btn-sm btn-curious-blue-variant-1">Volver</a>
@@ -31,6 +32,7 @@
 					<form action="." method = "POST" enctype="multipart/form-data">
 						{% csrf_token %}
 						{{ form.as_p }}
+						<br><div class="divider"></div>
 						<br>
 						<center>
 							<button class="btn btn-primary" type="submit" > Guardar </button>

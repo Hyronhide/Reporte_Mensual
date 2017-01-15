@@ -11,37 +11,60 @@
         		<h5 id="cn" align="center "><p>Bienvenido Administrador(a) {{usuario.first_name}} {{usuario.last_name}}, seleccione un mes para consultar reportes ingresados</p></h5>
 				<div class="divider"></div><br>
 				<center>
-					<a class="btn" href="/consultar/1" title="">Enero</a>
-					<a class="btn" href="/consultar/2" title="">Febrero</a>
-					<a class="btn" href="/consultar/3" title="">Marzo</a>
-					<a class="btn" href="/consultar/4" title="">Abril</a>
-					<a class="btn" href="/consultar/5" title="">Mayo</a>
-					<a class="btn" href="/consultar/6" title="">Junio</a>
-					<a class="btn" href="/consultar/7" title="">Julio</a>
-					<br><br>
-					<a class="btn" href="/consultar/8" title="">Agosto</a>
-					<a class="btn" href="/consultar/9" title="">Septiembre</a>
-					<a class="btn" href="/consultar/10" title="">Octubre</a>
-					<a class="btn" href="/consultar/11" title="">Noviembre</a>
-					<a class="btn" href="/consultar/12" title="">Diciembre</a>
+					<table class="responsive-table"> 
+
+			        <tbody>
+			          <tr>
+			            <td><a class="btn" style='width:150px; height:35px' href="/consultar/page/1/1" title="">Enero</a></td>
+			            <td><a class="btn" style='width:150px; height:35px' href="/consultar/page/1/2" title="">Febrero</a></td>
+			            <td><a class="btn" style='width:150px; height:35px' href="/consultar/page/1/3" title="">Marzo</a></td>
+			          </tr>
+			          <tr>
+			            <td><a class="btn" style='width:150px; height:35px' href="/consultar/page/1/4" title="">Abril</a></td>
+			            <td><a class="btn" style='width:150px; height:35px' href="/consultar/page/1/5" title="">Mayo</a></td>
+			            <td><a class="btn" style='width:150px; height:35px' href="/consultar/page/1/6" title="">Junio</a></td>
+			          </tr>
+			          <tr>
+			            <td><a class="btn" style='width:150px; height:35px' href="/consultar/page/1/7" title="">Julio</a></td>
+			            <td><a class="btn" style='width:150px; height:35px' href="/consultar/page/1/8" title="">Agosto</a></td>
+			            <td><a class="btn" id="botton_tam" href="/consultar/page/1/9" title="">Septiembre</a></td>
+			          </tr>
+			          <tr>
+			            <td><a class="btn" id="botton_tam" href="/consultar/page/1/10" title="">Octubre</a></td>
+			            <td><a class="btn" id="botton_tam" href="/consultar/page/1/11" title="">Noviembre</a></td>
+			            <td><a class="btn" id="botton_tam" href="/consultar/page/1/12" title="">Diciembre</a></td>
+			          </tr>
+			        </tbody>
+			      </table>		 
 				</center>			
         	{% else %}
         		<h5 id="cn" align="center "><p>Bienvenido(a) {{usuario.first_name}} {{usuario.last_name}},     seleccione un mes para ingrear el reporte</p></h5>
 				<div class="divider"></div><br>
 				<center>
-					<a class="btn" href="/reportes/1" title="">Enero</a>
-					<a class="btn" href="/reportes/2" title="">Febrero</a>
-					<a class="btn" href="/reportes/3" title="">Marzo</a>
-					<a class="btn" href="/reportes/4" title="">Abril</a>
-					<a class="btn" href="/reportes/5" title="">Mayo</a>
-					<a class="btn" href="/reportes/6" title="">Junio</a>
-					<a class="btn" href="/reportes/7" title="">Julio</a>
-					<br><br>
-					<a class="btn" href="/reportes/8" title="">Agosto</a>
-					<a class="btn" href="/reportes/9" title="">Septiembre</a>
-					<a class="btn" href="/reportes/10" title="">Octubre</a>
-					<a class="btn" href="/reportes/11" title="">Noviembre</a>
-					<a class="btn" href="/reportes/12" title="">Diciembre</a>
+					<table>						
+						<tbody>
+							<tr>
+								<td><a class="btn" id="botton_tam" href="/reportes/1" title="">Enero</a></td>
+								<td><a class="btn" id="botton_tam" href="/reportes/2" title="">Febrero</a></td>
+								<td><a class="btn" id="botton_tam" href="/reportes/3" title="">Marzo</a></td>
+							</tr>
+							<tr>
+								<td><a class="btn" id="botton_tam" href="/reportes/4" title="">Abril</a></td>
+								<td><a class="btn" id="botton_tam" href="/reportes/5" title="">Mayo</a></td>
+								<td><a class="btn" id="botton_tam" href="/reportes/6" title="">Junio</a></td>
+							</tr>
+							<tr>
+								<td><a class="btn" id="botton_tam" href="/reportes/7" title="">Julio</a></td>
+								<td><a class="btn" id="botton_tam" href="/reportes/8" title="">Agosto</a></td>
+								<td><a class="btn" id="botton_tam" href="/reportes/9" title="">Septiembre</a></td>
+							</tr>
+							<tr>
+								<td><a class="btn" id="botton_tam" href="/reportes/10" title="">Octubre</a></td>
+								<td><a class="btn" id="botton_tam" href="/reportes/11" title="">Noviembre</a></td>
+								<td><a class="btn" id="botton_tam" href="/reportes/12" title="">Diciembre</a></td>
+							</tr>
+						</tbody>
+					</table>				
 				</center>		
         	{% endif %}					
 		</div>	

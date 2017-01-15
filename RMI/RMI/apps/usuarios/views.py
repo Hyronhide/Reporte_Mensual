@@ -6,7 +6,9 @@ from django.contrib.auth import login, logout, authenticate
 from django.http import HttpResponseRedirect
 from django.contrib.auth.models import User ##
 from RMI.apps.usuarios.models import *
-
+from django.db.models import Q
+from django.core.paginator import Paginator, EmptyPage, InvalidPage#paginator
+import os 
 
 
 # Create your views here.
@@ -37,29 +39,68 @@ def logout_view(request):
 def user_view(request): 
 	us = User.objects.get(id= request.user.id)
 	ctx={'user':us}
-	return render_to_response('usuarios/user.html',ctx,context_instance = RequestContext(request))	
+	return render_to_response('usuarios/user.html',ctx,context_instance = RequestContext(request))
+
+def admin_user_view(request, id_user): 
+	us = User.objects.get(id= id_user)
+	ctx={'user':us}
+	return render_to_response('usuarios/admin_user.html',ctx,context_instance = RequestContext(request))			
 
 def edit_user_view(request):
 	info = ""	
 	info_enviado = False
 	us = User.objects.get(id = request.user.id)
+	user = User_profile.objects.get(user=us)
+	#formulario = UserForm()
 	if request.method == "POST":
-		formulario = UserForm(request.POST, request.FILES, instance = us)		
+		formulario = UserForm(request.POST, request.FILES, instance = us)
+		form_user= User_profile_Form(request.POST, request.FILES, instance = user)		
 		if formulario.is_valid():
 			info_enviado = True
+			#telefono = formulario.cleaned_data['telefono']
 			#clave = formulario.cleaned_data['password']
 			#formulario.password = us.set_password(clave)
 			edit_user = formulario.save(commit = False)
+			edit_user_telefono = form_user.save(commit = False)
+			#edit_user_telefono.telefono= telefono
 			#formulario.save_m2m()
 			#edit_user.status = True
+			edit_user_telefono.save()
 			edit_user.save()
 			info = "Guardado Satisfactoriamente"
 			#return HttpResponseRedirect ('/')
 			#return HttpResponseRedirect ('/user/')
 	else:
 		formulario = UserForm(instance = us)
-	ctx = {'form':formulario, 'informacion':info, 'info_enviado':info_enviado}	
+		form_user = User_profile_Form(instance = user)
+	ctx = {'form':formulario, 'form_user':form_user,'informacion':info, 'info_enviado':info_enviado}	
 	return render_to_response('usuarios/edit_user.html',ctx,context_instance = RequestContext(request))
+
+def admin_edit_user_view(request,id_user):
+	info = ""	
+	info_enviado = False
+	us = User.objects.get(id = id_user)
+	user = User_profile.objects.get(user=us)
+	if request.method == "POST":
+		formulario = AdminUserForm(request.POST, request.FILES, instance = us)	
+		form_user= User_profile_Form(request.POST, request.FILES, instance = user)		
+		if formulario.is_valid():
+			info_enviado = True
+			#clave = formulario.cleaned_data['password']
+			#formulario.password = us.set_password(clave)
+			edit_user = formulario.save(commit = False)	
+			edit_user_telefono = form_user.save(commit = False)		
+			#edit_user.status = True
+			edit_user_telefono.save()
+			edit_user.save()
+			info = "Guardado Satisfactoriamente"
+			#return HttpResponseRedirect ('/')
+			#return HttpResponseRedirect ('/instructores/')
+	else:
+		formulario = AdminUserForm(instance = us)
+		form_user = User_profile_Form(instance = user)
+	ctx = {'form':formulario, 'form_user':form_user,'informacion':info, 'info_enviado':info_enviado}	
+	return render_to_response('usuarios/admin_edit_user.html',ctx,context_instance = RequestContext(request))		
 
 def edit_password_view(request):
 	info = ""	
@@ -111,26 +152,6 @@ def admin_edit_password_view(request,id_user):
 	ctx = {'form':formulario, 'informacion':info, 'info_enviado':info_enviado}	
 	return render_to_response('usuarios/admin_edit_password.html',ctx,context_instance = RequestContext(request))				
 
-def admin_edit_user_view(request,id_user):
-	info = ""	
-	info_enviado = False
-	us = User.objects.get(id = id_user)
-	if request.method == "POST":
-		formulario = AdminUserForm(request.POST, request.FILES, instance = us)		
-		if formulario.is_valid():
-			info_enviado = True
-			#clave = formulario.cleaned_data['password']
-			#formulario.password = us.set_password(clave)
-			edit_user = formulario.save(commit = False)			
-			#edit_user.status = True
-			edit_user.save()
-			info = "Guardado Satisfactoriamente"
-			#return HttpResponseRedirect ('/')
-			#return HttpResponseRedirect ('/instructores/')
-	else:
-		formulario = AdminUserForm(instance = us)
-	ctx = {'form':formulario, 'informacion':info, 'info_enviado':info_enviado}	
-	return render_to_response('usuarios/admin_edit_user.html',ctx,context_instance = RequestContext(request))		
 
 def index_view(request):
 	usuario = User.objects.get(id= request.user.id)
@@ -153,8 +174,10 @@ def administrador_view(request):
 
 def register_view(request):
 	form = RegisterForm()
+	user_form = User_profile_Form()
 	if request.method == "POST":
 		form = RegisterForm(request.POST)
+		user_form = User_profile_Form(request.POST)
 		if form.is_valid():
 			nombres = form.cleaned_data['first_name']
 			apellidos = form.cleaned_data['last_name']
@@ -162,8 +185,21 @@ def register_view(request):
 			email = form.cleaned_data['email']
 			password_one = form.cleaned_data['password_one']
 			password_two = form.cleaned_data['password_two']
+			telefono = form.cleaned_data['telefono']
 			u = User.objects.create_user(first_name=nombres,last_name=apellidos,username=usuario,email=email,password=password_one)
+			user = user_form.save(commit=False)
+			user.telefono= telefono
+			user.user=u
+			#user= form.save(commit=False)
+			#user.user_profile.telefono=telefono
+			#user.save()
+			#user = u.save(commit=False)
+			#user.user_profile.telefono=telefono
+			user.save()			
 			u.save()# Guarda el objeto
+			#u.user_profile.telefono=telefono
+			#u.save()
+			
 			return render_to_response('usuarios/thanks_register.html',context_instance=RequestContext(request))
 		else:		
 			ctx = {'form':form}
@@ -171,10 +207,44 @@ def register_view(request):
 	ctx = {'form':form}
 	return render_to_response('usuarios/register.html',ctx,context_instance=RequestContext(request))
 
-def instructores_view(request):
-	instructores = User.objects.filter(is_staff=False)		 	
-	ctx={'instructores':instructores}
-	return render(request, 'usuarios/instructores.html',ctx) 	
+def instructores_view(request,pagina):
+	lista_instructores = User.objects.filter(is_staff=False)		
+	query = request.GET.get('q','')     
+	if query:
+		qset = (
+			Q(first_name__icontains=query)|
+			Q(last_name__icontains=query)|
+			Q(username__icontains=query)|
+			Q(email__icontains=query)
+		)
+		results = User.objects.filter(qset).distinct()  
+		mostrar = False      
+	else:
+		mostrar = True
+		results = []
+
+	#lista_prod = Producto.objects.filter(status = True)#SELECT * from Producto WHERE status= True
+	paginator = Paginator(lista_instructores, 15) 
+	try:
+		page = int(pagina)
+	except:
+		page = 1
+	try:
+		instructores = paginator.page(page)
+	except (EmptyPage,InvalidPage):
+		instructores = paginator.page(paginator.num_pages)	
+
+
+	return render_to_response('usuarios/instructores.html', {
+		"results": results,
+		"query": query,
+		"mostrar": mostrar,
+		"instructores":instructores,
+		"lista_instructores":lista_instructores,        
+	},context_instance=RequestContext(request))
+
+	#ctx={'instructores':instructores}
+	#return render(request, 'usuarios/instructores.html',ctx) 	
 ########################### SUBIR REPORTES POR MESES ##################################################
 def reportes_view(request, id_mes):
 	meses = { '1':'ENERO', '2':'FEBRERO', '3':'MARZO', '4':'ABRIL', '5':'MAYO','6':'JUNIO','7':'JULIO','8':'AGOSTO','9':'SEPTIEMBRE','10':'OCTUBRE','11':'NOVIEMBRE','12':'DICIEMBRE' }	
@@ -472,8 +542,10 @@ def del_reporte_view(request, id_reporte):
 		mes = rep.mes
 		meses = { 'ENERO': '1', 'FEBRERO': '2', 'MARZO': '3', 'ABRIL':'4', 'MAYO':'5', 'JUNIO':'6', 'JULIO':'7', 'AGOSTO':'8', 'SEPTIEMBRE':'9', 'OCTUBRE':'10', 'NOVIEMBRE':'11', 'DICIEMBRE':'12' }	
 		mes_num = meses[mes]
-		print mes		
+		print mes			
 		rep.delete()
+
+		#rep.adjunto_exel.url.delete()
 		info = "El reporte ha sido eliminado correctamente"
 		return HttpResponseRedirect('/reportes/%s'%(mes_num))
 	except:
@@ -531,15 +603,52 @@ def del_reporte_abril_view(request, id_reporte):
 
 #############################################	CONSULTAR REPORTES POR MES #####################################################
 '''
-def consultar_view(request,id_mes):
+def consultar_view(request,pagina,id_mes):
 	meses = { '1':'ENERO', '2':'FEBRERO', '3':'MARZO', '4':'ABRIL', '5':'MAYO','6':'JUNIO','7':'JULIO','8':'AGOSTO','9':'SEPTIEMBRE','10':'OCTUBRE','11':'NOVIEMBRE','12':'DICIEMBRE' }	
 	mes = meses[id_mes]	
-
-	consultar = Reporte_Mensual.objects.filter(mes=mes)
-	tolal_reportes = consultar.count
+	num_mes = id_mes
+	lista_consultar = Reporte_Mensual.objects.filter(mes=mes)
+	usuarios = User.objects.filter(is_staff=False)
+	instructores = usuarios.count
+	tolal_reportes = lista_consultar.count
 	#tolal_reportes = 0
 	#for c in consultar_enero:
 	#	tolal_reportes=tolal_reportes+1
+	query = request.GET.get('q','')     
+	if query:
+		qset = (
+			Q(usuario__first_name__icontains=query)|
+			Q(usuario__last_name__icontains=query)|
+			Q(usuario__username__icontains=query)|
+			Q(usuario__email__icontains=query)
+		)
+		results = Reporte_Mensual.objects.filter(qset,mes=mes).distinct()  
+		mostrar = False      
+	else:
+		mostrar = True
+		results = []
 
-	ctx = {'consultar':consultar, 'total_reportes':tolal_reportes, 'mes':mes}
-	return render(request, 'usuarios/consultar.html',ctx) 
+	paginator = Paginator(lista_consultar, 15) 
+	try:
+		page = int(pagina)
+	except:
+		page = 1
+	try:
+		consultar = paginator.page(page)
+	except (EmptyPage,InvalidPage):
+		consultar = paginator.page(paginator.num_pages)		
+		
+	return render_to_response('usuarios/consultar.html', {
+		"results": results,
+		"query": query,
+		"mostrar": mostrar,		
+		"consultar":consultar,
+		"total_reportes":tolal_reportes, 
+		"mes":mes,
+		"instructores":instructores,
+		"num_mes":num_mes,      
+	},context_instance=RequestContext(request))
+
+
+	#ctx = {'consultar':consultar, 'total_reportes':tolal_reportes, 'mes':mes}
+	#return render(request, 'usuarios/consultar.html',ctx) 

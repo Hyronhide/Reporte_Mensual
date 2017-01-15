@@ -13,9 +13,10 @@ urlpatterns = [
 	url(r'^administrador/$',administrador_view , name = 'vista_administrador'),
 	url(r'^registro/$',register_view, name = 'vista_registro'),
 	url(r'^user/$',user_view, name = 'vista_user'),
-	url(r'^instructores/$',instructores_view, name = 'vista_instructores'),
+	url(r'^admin_user/(?P<id_user>.*)/$',admin_user_view, name = 'vista_admin_user'),
+	url(r'^instructores/page/(?P<pagina>.*)/$',instructores_view, name = 'vista_instructores'),
 	url(r'^reportes/(?P<id_mes>.*)/$',reportes_view, name = 'vista_reportes'),
-	url(r'^consultar/(?P<id_mes>.*)/$',consultar_view , name = 'vista_consultar'),
+	url(r'^consultar/page/(?P<pagina>.*)/(?P<id_mes>.*)/$',consultar_view , name = 'vista_consultar'),
 	url(r'^admin_edit_user/(?P<id_user>.*)/$',admin_edit_user_view, name = 'vista_admin_edit_user'),
 
 	url(r'^del/reporte/(?P<id_reporte>.*)/$',del_reporte_view, name = 'vista_eliminar_reporte'),	

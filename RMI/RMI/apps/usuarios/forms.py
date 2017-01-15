@@ -23,7 +23,8 @@ class Reporte(forms.ModelForm):
 class UserForm(forms.ModelForm):	
 
 	first_name = forms.CharField(label="Nombres",widget=forms.TextInput())
-	last_name = forms.CharField(label="Apellidos",widget=forms.TextInput())	
+	last_name = forms.CharField(label="Apellidos",widget=forms.TextInput())
+	#telefono = forms.CharField(label="Telefono",widget=forms.TextInput())	
 	#password = forms.CharField(label="Password",widget=forms.PasswordInput(render_value=False))
 
 	class Meta:
@@ -43,13 +44,18 @@ class AdminUserForm(forms.ModelForm):
 	email    = forms.EmailField(label="Correo Electronico",widget=forms.TextInput())
 	#password = forms.CharField(label="Password",widget=forms.PasswordInput(render_value=False))
 
-	
+class User_profile_Form(forms.ModelForm):
+	class Meta:
+		model = User_profile
+		fields = ['telefono']	
 
 class RegisterForm(forms.Form):
+	
 	first_name = forms.CharField(label="Nombres",widget=forms.TextInput())
 	last_name = forms.CharField(label="Apellidos",widget=forms.TextInput())
 	username = forms.CharField(label="Cedula",widget=forms.TextInput())
 	email    = forms.EmailField(label="Correo Electronico",widget=forms.TextInput())
+	telefono = forms.CharField(label="Telefono",widget=forms.TextInput())
 	password_one = forms.CharField(label="Password",widget=forms.PasswordInput(render_value=False))
 	password_two = forms.CharField(label="Confirmar password",widget=forms.PasswordInput(render_value=False))	
 	

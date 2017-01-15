@@ -27,16 +27,14 @@
 					
 				{% else %}
 					<form action="." method = "POST" enctype="multipart/form-data">
-					{% csrf_token %}
-					{{ form.as_p }}
-					<br>
-					<center>
-						<button class="btn btn-primary" type="submit" > Guardar </button>
-						<a href="{% url 'vista_index' %}" class="btn btn-sm btn-curious-blue-variant-1">Volver</a>
-					</center>
-					
-					
-				</form>
+						{% csrf_token %}
+						{{ form.as_p }}
+						<br>
+						<center>
+							<button class="btn btn-primary" type="submit" > Guardar </button>
+							<a href="{% url 'vista_index' %}" class="btn btn-sm btn-curious-blue-variant-1">Volver</a>
+						</center>					
+					</form>
 				{% endif %}
 			</div>	
 			

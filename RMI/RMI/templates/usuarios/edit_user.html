@@ -15,6 +15,7 @@
 			<form action="." method = "POST" enctype="multipart/form-data">
 				{% csrf_token %}
 				{{ form.as_p }}
+				{{ form_user.as_p }}
 				<center>
 					<button  type="submit" class="btn"> Guardar </button>
 					<a class="btn" href="{% url 'vista_user' %}">Volver</a>
