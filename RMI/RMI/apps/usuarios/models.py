@@ -1,3 +1,4 @@
+#-*- coding: utf-8 -*-
 from __future__ import unicode_literals
 from django.contrib.auth.models import User
 from django.db.models.signals import pre_delete, post_delete
@@ -29,7 +30,7 @@ class Reporte_Mensual(models.Model):
 @receiver(pre_delete, sender=Reporte_Mensual)
 def _Reporte_Mensual_delete(sender, instance, using, **kwargs):
     file_path = settings.MEDIA_ROOT + str(instance.adjunto_exel)
-    print(file_path)
+    #print(file_path)
 
     if os.path.isfile(file_path):
         os.remove(file_path)		

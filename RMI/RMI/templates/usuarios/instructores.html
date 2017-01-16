@@ -15,7 +15,7 @@
 		</head>
 		<form class="col s12" action="." method="GET">
 			<!--<label for="q">Instructor: </label>-->				
-			<input  type="text" name="q" value="{{ query|escape }}">
+			<input style='width:50%;' type="text" name="q" value="{{ query|escape }}">
 			<br>			
 			<button  style="btn" class="btn" type="submit" >Buscar </button>
 		</form>
@@ -27,9 +27,10 @@
 				<table class="col s12 bordered responsive-table highlight">
 					<theader>
 						<tr>
-							<th>Nombre</th>										
+							<th>Nombres</th>	
+							<th>Apellidos</th>									
 							<th>Cedula</th>
-							<th>Correo</th>
+							<th>Teléfono</th>
 							<th></th>
 							<th></th>											
 						</tr>
@@ -37,7 +38,8 @@
 					<tbody>
 						{% for i in results %}
 						<tr>
-							<td>{{ i.first_name }} {{ i.last_name }}</td>				
+							<td>{{ i.first_name }}</td>
+							<td>{{ i.last_name }}</td>				
 							<td>{{ i.username }}</td>	
 							<td>{{ i.user_profile.telefono }}</td>									
 							<td><a href="/admin_edit_user/{{i.id}}" title="">(Editar)</a></td>	
@@ -60,7 +62,7 @@
 							<th>Nombres</th>	
 							<th>Apellidos</th>										
 							<th>Cedula</th>
-							<th>Telefono</th>
+							<th>Teléfono</th>
 							<th></th>
 							<th></th>											
 						</tr>

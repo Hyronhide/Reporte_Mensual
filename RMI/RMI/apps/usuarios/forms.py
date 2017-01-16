@@ -1,3 +1,4 @@
+#-*- coding: utf-8 -*-
 from django import forms
 from django.contrib.auth.models import User 
 from RMI.apps.usuarios.models import *
@@ -41,7 +42,7 @@ class AdminUserForm(forms.ModelForm):
 	first_name = forms.CharField(label="Nombres",widget=forms.TextInput())
 	last_name = forms.CharField(label="Apellidos",widget=forms.TextInput())
 	username = forms.CharField(label="Cedula",widget=forms.TextInput())
-	email    = forms.EmailField(label="Correo Electronico",widget=forms.TextInput())
+	email    = forms.EmailField(label="Correo Electrónico",widget=forms.TextInput())
 	#password = forms.CharField(label="Password",widget=forms.PasswordInput(render_value=False))
 
 class User_profile_Form(forms.ModelForm):
@@ -49,13 +50,15 @@ class User_profile_Form(forms.ModelForm):
 		model = User_profile
 		fields = ['telefono']	
 
+	telefono = forms.CharField(label="Teléfono",widget=forms.TextInput())	
+
 class RegisterForm(forms.Form):
 	
 	first_name = forms.CharField(label="Nombres",widget=forms.TextInput())
 	last_name = forms.CharField(label="Apellidos",widget=forms.TextInput())
 	username = forms.CharField(label="Cedula",widget=forms.TextInput())
-	email    = forms.EmailField(label="Correo Electronico",widget=forms.TextInput())
-	telefono = forms.CharField(label="Telefono",widget=forms.TextInput())
+	email    = forms.EmailField(label="Correo Electrónico",widget=forms.TextInput())
+	telefono = forms.CharField(label="Teléfono",widget=forms.TextInput())
 	password_one = forms.CharField(label="Password",widget=forms.PasswordInput(render_value=False))
 	password_two = forms.CharField(label="Confirmar password",widget=forms.PasswordInput(render_value=False))	
 	

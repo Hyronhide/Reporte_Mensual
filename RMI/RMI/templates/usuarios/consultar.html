@@ -7,8 +7,8 @@
 {% block content %}
 <div align="center">
     <div id="car" class="card z-depth-3 hoverable" >
-		<h5 id="cn" align="center "><p><b>{{mes}}</b>: TOTAL DE REPORTES <b>{{total_reportes}}</b> DE <b>{{instructores}}</b> INSTRUCTORES REGISTRADOS</p></h5>
-		<!--<div class="divider"></div><br>-->
+		<h5 id="cn" align="center "><p><b>{{mes}}</b>: TOTAL REPORTES <b>{{total_reportes}}</b> DE <b>{{instructores}}</b> INSTRUCTORES REGISTRADOS</p></h5>
+		<div class="divider"></div><br>
 		<br>
 		<div >
 			<head>
@@ -17,7 +17,7 @@
 			<div>
 				<form action="." method="GET">
 					<!--<label for="q">Instructor: </label>-->				
-					<input type="text" name="q" value="{{ query|escape }}" title="programa">
+					<input style='width:50%;' type="text" name="q" value="{{ query|escape }}" title="programa">
 					<br>			
 					<button  style="btn" class="btn" type="submit" >Buscar </button>
 				</form>
@@ -52,7 +52,7 @@
 					</tbody>							
 				</table>
 			{% else %}
-			  <p>No se encuentra la busqueda solicitada</p>
+			  <p>No se encuentra la búsqueda solicitada</p>
 			{% endif %}
 		{% endif %}		
 		<br><br><br><br>		
