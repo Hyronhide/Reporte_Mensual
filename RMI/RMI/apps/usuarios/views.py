@@ -100,7 +100,7 @@ def admin_edit_user_view(request,id_user):
 	else:
 		formulario = AdminUserForm(instance = us)
 		form_user = User_profile_Form(instance = user)
-	ctx = {'form':formulario, 'form_user':form_user,'informacion':info, 'info_enviado':info_enviado}	
+	ctx = {'form':formulario, 'form_user':form_user,'informacion':info, 'info_enviado':info_enviado,'usuario':us}	
 	return render_to_response('usuarios/admin_edit_user.html',ctx,context_instance = RequestContext(request))		
 
 def edit_password_view(request):
@@ -168,10 +168,30 @@ def password_guardado_admin_view(request):
 	return render(request, 'usuarios/password_guardado_admin.html') 		 
 
 
-def administrador_view(request):	
-	usuario = User.objects.get(id= request.user.id)
+def eliminar_instructor_view(request,id_user):	
+	usuario = User.objects.get(id= id_user)
 	ctx={'usuario':usuario}
-	return render(request, 'usuarios/administrador.html',ctx) 	
+	return render(request, 'usuarios/eliminar_instructor.html',ctx)
+
+def confirmar_eliminar_instructor_view(request,id_user):	
+	
+	info = "inicializando"
+	try:
+		usuario = User.objects.get(id= id_user)
+		user_telefono = User_profile.objects.get(user= usuario)
+		reporte = Reporte_Mensual.objects.filter(usuario= usuario)
+		usuario.delete()			
+		user_telefono.delete()
+		if reporte:
+			for r in reporte:
+				r.delete()
+		#rep.adjunto_exel.url.delete()
+		info = "El instructor ha sido eliminado correctamente"
+		return HttpResponseRedirect('/instructores/page/1')
+	except:
+		info = "EL reporte no se puede eliminar"
+		#return render_to_response('home/productos.html', context_instance = RequestContext(request))
+		return HttpResponseRedirect('/index/')		
 
 def register_view(request):
 	form = RegisterForm()

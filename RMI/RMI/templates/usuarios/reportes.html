@@ -17,7 +17,7 @@
 						<font size="4">
 							<p><b>Nombre del reporte:</b> {{r.nombre_adjunto}} </p>
 							<p><b>Adjunto:</b> {{r.adjunto_exel}}  <a href="{{r.adjunto_exel.url}} " title="">(Descargar)</a></p>								
-							<p><b>Fecha:</b> {{r.fecha}}</p>
+							<p><b>Fecha:</b> {{r.fecha|date:"d/m/Y" }}</p>
 						</font>						
 						<br><div class="divider"></div>
 						<br>

@@ -26,11 +26,10 @@
 <body>
 	{% if user.is_authenticated %}
 	 <nav class="teal darken-1" role="navigation">
-		<div >
+		
 		<img src="/media/images/Logos-sena-blanco.png" width="110px" height="70px" float="left">
-		<a  href="{% url 'vista_index' %}" class="brand-logo" float="left"><font size="5">Reporte Mensual Instructor</font></a>
-		</a>
-		  <ul class="right hide-on-med-and-down">
+		<a  href="{% url 'vista_index' %}" class="brand-logo hide-on-med-and-down" float="left"><font size="5">Reporte Mensual Instructor</font></a>		
+		  <ul class="right ">
 		  	<li><a  href="{% url 'vista_index' %}">Inicio</a></li>
 		  	{% if user.is_staff %}
 		  		<li><a  href="{% url 'vista_registro' %}">Registrar</a></li>
@@ -40,7 +39,7 @@
 		  	{% endif %}		  	 
 			 <li><a  href="{% url 'vista_logout' %}">Logout</a></li>
 		  </ul>		  
-		</div>
+		
 	 </nav>  
 	  <!--
 	  <nav class=" teal darken-1 " class="menu-header">

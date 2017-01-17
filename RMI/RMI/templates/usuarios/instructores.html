@@ -32,7 +32,8 @@
 							<th>Cedula</th>
 							<th>Teléfono</th>
 							<th></th>
-							<th></th>											
+							<th></th>
+							<th></th>												
 						</tr>
 					</theader>					
 					<tbody>
@@ -41,7 +42,8 @@
 							<td>{{ i.first_name }}</td>
 							<td>{{ i.last_name }}</td>				
 							<td>{{ i.username }}</td>	
-							<td>{{ i.user_profile.telefono }}</td>									
+							<td>{{ i.user_profile.telefono }}</td>		
+							<td><a href="/admin_user/{{i.id}}" title="">(Ver Perfil)</a></td>		
 							<td><a href="/admin_edit_user/{{i.id}}" title="">(Editar)</a></td>	
 							<td><a href="/admin_edit_password/{{i.id}}" title="">(Cambiar Clave)</a></td>					
 						</tr>
@@ -64,7 +66,8 @@
 							<th>Cedula</th>
 							<th>Teléfono</th>
 							<th></th>
-							<th></th>											
+							<th></th>
+							<th></th>												
 						</tr>
 					</theader>					
 					<tbody>

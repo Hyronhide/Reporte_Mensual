@@ -18,6 +18,11 @@ nav{
 	margin-bottom: 25px;
 	height: 70px;
 }
+.btn:hover {
+	 background: rgba(0,0,0,0);
+	 color: #FF8900;
+	 box-shadow: inset 0 0 0 3px #FF8900;
+}
 #botton_tam{
 	width:150px; 
 	height:35px;
