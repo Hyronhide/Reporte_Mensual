@@ -220,8 +220,8 @@ def register_view(request):
 			u.save()# Guarda el objeto
 			#u.user_profile.telefono=telefono
 			#u.save()
-			
-			return render_to_response('usuarios/thanks_register.html',context_instance=RequestContext(request))
+			ctx = {'user':u}
+			return render_to_response('usuarios/thanks_register.html',ctx,context_instance=RequestContext(request))
 		else:		
 			ctx = {'form':form}
 			return render_to_response('usuarios/register.html',ctx,context_instance=RequestContext(request))

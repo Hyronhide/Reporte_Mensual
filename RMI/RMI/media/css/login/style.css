@@ -22,10 +22,10 @@ body {
   font-size: 12px;
 }
 .pen-title span .fa {
-  color: #33b5e5;
+  color: #009688;
 }
 .pen-title span a {
-  color: #33b5e5;
+  color: #009688;
   font-weight: 600;
   text-decoration: none;
 }
@@ -36,7 +36,7 @@ body {
   background: #ffffff;
   max-width: 320px;
   width: 100%;
-  border-top: 5px solid #33b5e5;
+  border-top: 5px solid #009688;
   box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
   margin: 0 auto;
 }

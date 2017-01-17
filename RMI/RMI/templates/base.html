@@ -3,7 +3,8 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	
+	<title>{% block title %}{% endblock  %}</title>
+
   	{% if user.is_authenticated %}
   	<link rel="icon" href="/media/images/favicon.png" sizes="32x32">
  	<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -14,8 +15,7 @@
 	
 	<!--<link rel="stylesheet" type="text/css" href="/static/css/materialize.css"/>-->
 		
-	<title>{% block title %}{% endblock  %}</title>
-
+	
 	{% else %}
 		{% block head %}  	
   		{% endblock  %}
