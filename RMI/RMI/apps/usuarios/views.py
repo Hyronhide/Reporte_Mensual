@@ -156,7 +156,58 @@ def admin_edit_password_view(request,id_user):
 
 def index_view(request):
 	usuario = User.objects.get(id= request.user.id)
-	ctx={'usuario':usuario}
+	mes_enero_instructor = Reporte_Mensual.objects.filter(usuario= usuario,mes='ENERO')
+	mes_febrero_instructor = Reporte_Mensual.objects.filter(usuario= usuario,mes='FEBRERO')
+	mes_marzo_instructor = Reporte_Mensual.objects.filter(usuario= usuario,mes='MARZO')
+	mes_mayo_instructor = Reporte_Mensual.objects.filter(usuario= usuario,mes='MAYO')
+	mes_abril_instructor = Reporte_Mensual.objects.filter(usuario= usuario,mes='ABRIL')
+	mes_junio_instructor = Reporte_Mensual.objects.filter(usuario= usuario,mes='JUNIO')
+	mes_julio_instructor = Reporte_Mensual.objects.filter(usuario= usuario,mes='JULIO')
+	mes_agosto_instructor = Reporte_Mensual.objects.filter(usuario= usuario,mes='AGOSTO')
+	mes_septiembre_instructor = Reporte_Mensual.objects.filter(usuario= usuario,mes='SEPTIEMBRE')
+	mes_octubre_instructor = Reporte_Mensual.objects.filter(usuario= usuario,mes='OCTUBRE')
+	mes_noviembre_instructor = Reporte_Mensual.objects.filter(usuario= usuario,mes='NOVIEMBRE')
+	mes_diciembre_instructor = Reporte_Mensual.objects.filter(usuario= usuario,mes='DICIEMBRE')
+
+	mes_enero_admin = Reporte_Mensual.objects.filter(mes='ENERO')
+	mes_febrero_admin = Reporte_Mensual.objects.filter(mes='FEBRERO')
+	mes_marzo_admin = Reporte_Mensual.objects.filter(mes='MARZO')
+	mes_mayo_admin = Reporte_Mensual.objects.filter(mes='MAYO')
+	mes_abril_admin = Reporte_Mensual.objects.filter(mes='ABRIL')
+	mes_junio_admin = Reporte_Mensual.objects.filter(mes='JUNIO')
+	mes_julio_admin = Reporte_Mensual.objects.filter(mes='JULIO')
+	mes_agosto_admin = Reporte_Mensual.objects.filter(mes='AGOSTO')
+	mes_septiembre_admin = Reporte_Mensual.objects.filter(mes='SEPTIEMBRE')
+	mes_octubre_admin = Reporte_Mensual.objects.filter(mes='OCTUBRE')
+	mes_noviembre_admin = Reporte_Mensual.objects.filter(mes='NOVIEMBRE')
+	mes_diciembre_admin = Reporte_Mensual.objects.filter(mes='DICIEMBRE')
+
+	ctx={'usuario':usuario,
+		'mes_enero_instructor':mes_enero_instructor,
+		'mes_febrero_instructor':mes_febrero_instructor,
+		'mes_marzo_instructor':mes_marzo_instructor,
+		'mes_mayo_instructor':mes_mayo_instructor,
+		'mes_abril_instructor':mes_abril_instructor,
+		'mes_junio_instructor':mes_junio_instructor,
+		'mes_julio_instructor':mes_julio_instructor,
+		'mes_agosto_instructor':mes_agosto_instructor,
+		'mes_septiembre_instructor':mes_septiembre_instructor,
+		'mes_octubre_instructor':mes_octubre_instructor,
+		'mes_noviembre_instructor':mes_noviembre_instructor,
+		'mes_diciembre_instructor':mes_diciembre_instructor,
+		'mes_enero_admin':mes_enero_admin,
+		'mes_febrero_admin':mes_febrero_admin,
+		'mes_marzo_admin':mes_marzo_admin,
+		'mes_mayo_admin':mes_mayo_admin,
+		'mes_abril_admin':mes_abril_admin,
+		'mes_junio_admin':mes_junio_admin,
+		'mes_julio_admin':mes_julio_admin,
+		'mes_agosto_admin':mes_agosto_admin,
+		'mes_septiembre_admin':mes_septiembre_admin,
+		'mes_octubre_admin':mes_octubre_admin,
+		'mes_noviembre_admin':mes_noviembre_admin,
+		'mes_diciembre_admin':mes_diciembre_admin
+		}
 	return render(request, 'usuarios/index.html',ctx) 
 
 def password_guardado_user_view(request):

@@ -14,6 +14,9 @@
 			<div >
 				{% if reporte_validar %}
 					{% for r in  reporte_validar %}
+						<center><h5 id="cn">El archivo se ha subido con exito</h5></center>
+						<br>
+						<div class="divider"></div><br>
 						<font size="4">
 							<p><b>Nombre del reporte:</b> {{r.nombre_adjunto}} </p>
 							<p><b>Adjunto:</b> {{r.adjunto_exel}}  <a href="{{r.adjunto_exel.url}} " title="">(Descargar)</a></p>								
@@ -29,6 +32,9 @@
 					{% endfor %}
 					
 				{% else %}
+					<center><h5 id="cn">Usted no ha subido ningun archivo</h5></center>
+					<br>
+					<div class="divider"></div><br>
 					<form action="." method = "POST" enctype="multipart/form-data">
 						{% csrf_token %}
 						{{ form.as_p }}

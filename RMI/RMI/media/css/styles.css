@@ -37,6 +37,35 @@ ul.pag li a:hover:not(.active) {
 	border-radius: 5px;
 }
 
+.cambio{
+	  border: none;
+	  border-radius: 2px;
+	  display: inline-block;
+	  height: 36px;
+	  line-height: 36px;
+	  outline: 0;
+	  padding: 0 2rem;
+	  text-transform: uppercase;
+	  vertical-align: middle;
+	  -webkit-tap-highlight-color: transparent;
+	  text-decoration: none;
+	  color: #fff;
+	  background-color: #26a69a;
+	  text-align: center;
+	  letter-spacing: .5px;
+	  transition: .2s ease-out;
+	  cursor: pointer;
+	  box-shadow: 0 2px 4px 0 rgba(0,0,0,0.24), 0 2px 4px 0 rgba(0,0,0,0.19);
+
+}
+
+.cambio:hover{
+	background: rgba(0,0,0,0);
+	color: #26a69a;
+	/*box-shadow: inset 0 0 0 3px #FF8900;*/
+	box-shadow: 0 4px 6px 0 rgba(0,0,0,0.24), 0 6px 18px 0 rgba(0,0,0,0.19);
+}
+
 .btn:hover {
 	 background: rgba(0,0,0,0);
 	 color: #FF8900;
