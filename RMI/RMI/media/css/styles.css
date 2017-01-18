@@ -18,6 +18,25 @@ nav{
 	margin-bottom: 25px;
 	height: 70px;
 }
+
+ul.pag {
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+}
+
+ul.pag li {display: inline;}
+
+ul.pag li a {
+    
+    padding: 6px;
+    text-decoration: none;
+}
+ul.pag li a:hover:not(.active) {
+	background-color: #ddd;
+	border-radius: 5px;
+}
+
 .btn:hover {
 	 background: rgba(0,0,0,0);
 	 color: #FF8900;

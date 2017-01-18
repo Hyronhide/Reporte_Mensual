@@ -90,7 +90,7 @@
 			{% if consultar %}
 			<div class = "pagination">
 				<div class = "pagination pagination-centered">
-					<ul>
+					<ul class="pag">
 						<li><a href="/consultar/page/1/{{num_mes}}"> << </a></li>
 						{% if consultar.has_previous %}
 							<li><a href="/consultar/page/{{ consultar.previous_page_number }}/{{num_mes}}" > Anterior</a></li>
