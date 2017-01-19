@@ -93,7 +93,7 @@
 			<div class = "pagination">
 				<div class = "pagination pagination-centered">
 					<ul class="pag">
-						<li><a href="/instructores/page/1"> << </a></li>
+						<li><a href="/instructores/page/1"> {{primera}} </a></li>
 						{% if instructores.has_previous %}
 							<li><a href="/instructores/page/{{ instructores.previous_page_number }}" > Anterior</a></li>
 						{% else %}
@@ -105,7 +105,7 @@
 						{% else %}
 							<li><a href="#"> Siguiente</a></li>	
 						{% endif %}
-							<li><a href="/instructores/page/{{ instructores.paginator.num_pages }}"> ult </a></li>
+							<li><a href="/instructores/page/{{ instructores.paginator.num_pages }}"> {{ultima}} </a></li>
 					</ul>			
 				</div>		
 			</div>

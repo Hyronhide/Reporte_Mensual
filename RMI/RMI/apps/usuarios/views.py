@@ -280,7 +280,9 @@ def register_view(request):
 	return render_to_response('usuarios/register.html',ctx,context_instance=RequestContext(request))
 
 def instructores_view(request,pagina):
-	lista_instructores = User.objects.filter(is_staff=False)		
+	lista_instructores = User.objects.filter(is_staff=False)	
+	primera = "<<Primera"
+	ultima = "Ultima>>"	
 	query = request.GET.get('q','')     
 	if query:
 		qset = (
@@ -312,7 +314,9 @@ def instructores_view(request,pagina):
 		"query": query,
 		"mostrar": mostrar,
 		"instructores":instructores,
-		"lista_instructores":lista_instructores,        
+		"lista_instructores":lista_instructores, 
+		"primera":primera,
+		"ultima":ultima,       
 	},context_instance=RequestContext(request))
 
 	#ctx={'instructores':instructores}
@@ -401,6 +405,8 @@ def consultar_view(request,pagina,id_mes):
 	meses = { '1':'ENERO', '2':'FEBRERO', '3':'MARZO', '4':'ABRIL', '5':'MAYO','6':'JUNIO','7':'JULIO','8':'AGOSTO','9':'SEPTIEMBRE','10':'OCTUBRE','11':'NOVIEMBRE','12':'DICIEMBRE' }	
 	mes = meses[id_mes]	
 	num_mes = id_mes
+	primera = "<<Primera"
+	ultima = "Ultima>>"	
 	lista_consultar = Reporte_Mensual.objects.filter(mes=mes)
 	usuarios = User.objects.filter(is_staff=False)
 	instructores = usuarios.count
@@ -440,7 +446,9 @@ def consultar_view(request,pagina,id_mes):
 		"total_reportes":tolal_reportes, 
 		"mes":mes,
 		"instructores":instructores,
-		"num_mes":num_mes,      
+		"num_mes":num_mes,  
+		"primera":primera,
+		"ultima":ultima,     
 	},context_instance=RequestContext(request))
 
 
