@@ -12,6 +12,7 @@ class User_profile(models.Model):
 
 	user     = models.OneToOneField(User)	
 	telefono = models.CharField(max_length=13)
+	#imagen   = models.ImageField(upload_to='Perfil/',default='Perfil/perfil.jpg')
 	
 	def __unicode__(self):
 		return self.user.username
@@ -33,4 +34,13 @@ def _Reporte_Mensual_delete(sender, instance, using, **kwargs):
     #print(file_path)
 
     if os.path.isfile(file_path):
-        os.remove(file_path)		
+        os.remove(file_path)	
+'''
+@receiver(pre_delete, sender=User_profile)
+def _User_Profile_delete(sender, instance, using, **kwargs):
+    file_path = settings.MEDIA_ROOT + str(instance.imagen)
+    #print(file_path)
+
+    if os.path.isfile(file_path):
+        os.remove(file_path)	        	
+'''        

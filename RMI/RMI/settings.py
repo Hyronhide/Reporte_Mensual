@@ -80,8 +80,8 @@ WSGI_APPLICATION = 'RMI.wsgi.application'
 
 DATABASES = {
     'default': {
-        #'ENGINE': 'django.db.backends.sqlite3',
-        #'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
         #'USER': '',
         #'PASSWORD': '',
         #'HOST': '',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
@@ -94,15 +94,15 @@ DATABASES = {
         #'HOST': '127.0.0.1',
         #'PORT': '3306',
         #
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'd31khsdjbpq573',
-        'USER': 'amqvbjpbpuucva',
-        'PASSWORD': '73c862446f4ffe13f9ae255f6e386a2ed19d35b33e57f55328c85d9a7da8cd9a',
-        'HOST': 'ec2-54-243-197-180.compute-1.amazonaws.com',
-        'PORT': 5432,
+        #'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        #'NAME': 'd31khsdjbpq573',
+        #'USER': 'amqvbjpbpuucva',
+        #'PASSWORD': '73c862446f4ffe13f9ae255f6e386a2ed19d35b33e57f55328c85d9a7da8cd9a',
+        #'HOST': 'ec2-54-243-197-180.compute-1.amazonaws.com',
+        #'PORT': 5432,
     }
 }
-
+'''
 import dj_database_url
 
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
@@ -111,7 +111,7 @@ db_from_env = dj_database_url.config(conn_max_age=500)
 DATABASES['default'].update(db_from_env)
 DATABASES['default'] = dj_database_url.config()
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-
+'''
 # Password validation
 # https://docs.djangoproject.com/en/1.9/ref/settings/#auth-password-validators
 

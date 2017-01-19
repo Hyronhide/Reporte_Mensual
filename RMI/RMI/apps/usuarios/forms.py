@@ -48,9 +48,10 @@ class AdminUserForm(forms.ModelForm):
 class User_profile_Form(forms.ModelForm):
 	class Meta:
 		model = User_profile
-		fields = ['telefono']	
+		fields = ['telefono','imagen']	
 
-	telefono = forms.CharField(label="Teléfono",widget=forms.TextInput())	
+	telefono = forms.CharField(label="Teléfono",widget=forms.TextInput())
+	imagen = forms.FileField(label="Foto de perfil",widget=forms.ClearableFileInput())	
 
 class RegisterForm(forms.Form):
 	
@@ -58,9 +59,10 @@ class RegisterForm(forms.Form):
 	last_name = forms.CharField(label="Apellidos",widget=forms.TextInput())
 	username = forms.CharField(label="Cedula",widget=forms.TextInput())
 	email    = forms.EmailField(label="Correo Electrónico",widget=forms.TextInput())
-	telefono = forms.CharField(label="Teléfono",widget=forms.TextInput())
+	telefono = forms.CharField(label="Teléfono",widget=forms.TextInput())	
 	password_one = forms.CharField(label="Password",widget=forms.PasswordInput(render_value=False))
 	password_two = forms.CharField(label="Confirmar password",widget=forms.PasswordInput(render_value=False))	
+	#imagen = forms.FileField(label="Foto de perfil",widget=forms.ClearableFileInput())
 	
 	def clean_username(self):
 		username = self.cleaned_data['username']

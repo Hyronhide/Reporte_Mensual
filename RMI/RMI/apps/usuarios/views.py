@@ -63,6 +63,7 @@ def edit_user_view(request):
 			#formulario.password = us.set_password(clave)
 			edit_user = formulario.save(commit = False)
 			edit_user_telefono = form_user.save(commit = False)
+			#edit_user_telefono.imagen = form_user.imagen
 			#edit_user_telefono.telefono= telefono
 			#formulario.save_m2m()
 			#edit_user.status = True
@@ -261,6 +262,7 @@ def register_view(request):
 			u = User.objects.create_user(first_name=nombres,last_name=apellidos,username=usuario,email=email,password=password_one)
 			user = user_form.save(commit=False)
 			user.telefono= telefono
+			#user.imagen = form.imagen
 			user.user=u
 			#user= form.save(commit=False)
 			#user.user_profile.telefono=telefono
