@@ -326,7 +326,8 @@ def reportes_view(request, id_mes):
 	meses = { '1':'ENERO', '2':'FEBRERO', '3':'MARZO', '4':'ABRIL', '5':'MAYO','6':'JUNIO','7':'JULIO','8':'AGOSTO','9':'SEPTIEMBRE','10':'OCTUBRE','11':'NOVIEMBRE','12':'DICIEMBRE' }	
 	mes = meses[id_mes]	
 	
-	reporte_validar = Reporte_Mensual.objects.filter(mes= mes,usuario__id= request.user.id )	
+	reporte_validar = Reporte_Mensual.objects.filter(mes= mes,usuario__id= request.user.id )
+	user = User.objects.get(id= request.user.id )	
 	nombre_adjunto = ""	
 	info_enviado = False
 	if request.method == "POST":		
@@ -336,8 +337,35 @@ def reportes_view(request, id_mes):
 			nombre_adjunto = form.cleaned_data['nombre_adjunto']											
 			reporte = form.save(commit = False)
 			reporte.usuario = request.user	
-			reporte.mes = mes					
-			reporte.save()					
+			reporte.mes = mes			
+			reporte.save()
+
+			if id_mes=='1':
+				user.user_profile.enero=True
+			elif id_mes=='2':
+				user.user_profile.febrero=True
+			elif id_mes=='3':
+				user.user_profile.marzo=True
+			elif id_mes=='4':
+				user.user_profile.abril=True
+			elif id_mes=='5':
+				user.user_profile.mayo=True
+			elif id_mes=='6':
+				user.user_profile.junio=True
+			elif id_mes=='7':
+				user.user_profile.julio=True
+			elif id_mes=='8':
+				user.user_profile.agosto=True
+			elif id_mes=='9':
+				user.user_profile.septiembre=True
+			elif id_mes=='10':
+				user.user_profile.octubre=True
+			elif id_mes=='11':
+				user.user_profile.noviembre=True
+			elif id_mes=='12':
+				user.user_profile.diciembre=True
+
+			user.user_profile.save()						
 	else:
 		form = Reporte()
 
@@ -369,14 +397,41 @@ def enero_view(request):
 ############################################### 	BORRAR REPORTES MESES    ############################################
 def del_reporte_view(request, id_reporte):
 	info = "inicializando"
+	user = User.objects.get(id= request.user.id )	
 	try:
 		rep = Reporte_Mensual.objects.get(id = id_reporte)
 		mes = rep.mes
 		meses = { 'ENERO': '1', 'FEBRERO': '2', 'MARZO': '3', 'ABRIL':'4', 'MAYO':'5', 'JUNIO':'6', 'JULIO':'7', 'AGOSTO':'8', 'SEPTIEMBRE':'9', 'OCTUBRE':'10', 'NOVIEMBRE':'11', 'DICIEMBRE':'12' }	
 		mes_num = meses[mes]
-		print mes			
-		rep.delete()
+		id_mes=mes_num
+		print mes	
+		if id_mes=='1':
+			user.user_profile.enero=False
+		elif id_mes=='2':
+			user.user_profile.febrero=False
+		elif id_mes=='3':
+			user.user_profile.marzo=False
+		elif id_mes=='4':
+			user.user_profile.abril=False
+		elif id_mes=='5':
+			user.user_profile.mayo=False
+		elif id_mes=='6':
+			user.user_profile.junio=False
+		elif id_mes=='7':
+			user.user_profile.julio=False
+		elif id_mes=='8':
+			user.user_profile.agosto=False
+		elif id_mes=='9':
+			user.user_profile.septiembre=False
+		elif id_mes=='10':
+			user.user_profile.octubre=False
+		elif id_mes=='11':
+			user.user_profile.noviembre=False
+		elif id_mes=='12':
+			user.user_profile.diciembre=False		
 
+		rep.delete()
+		user.user_profile.save()
 		#rep.adjunto_exel.url.delete()
 		info = "El reporte ha sido eliminado correctamente"
 		return HttpResponseRedirect('/reportes/%s'%(mes_num))
@@ -401,6 +456,84 @@ def del_reporte_enero_view(request, id_reporte):
 
 #############################################	CONSULTAR REPORTES POR MES #####################################################
 '''
+def consultar_sin_subir_view(request,pagina,id_mes):
+	meses = { '1':'ENERO', '2':'FEBRERO', '3':'MARZO', '4':'ABRIL', '5':'MAYO','6':'JUNIO','7':'JULIO','8':'AGOSTO','9':'SEPTIEMBRE','10':'OCTUBRE','11':'NOVIEMBRE','12':'DICIEMBRE' }	
+	mes = meses[id_mes]	
+	num_mes = id_mes
+	primera = "<<Primera"
+	ultima = "Ultima>>"	
+	if id_mes=='1':
+		lista_consultar = User.objects.filter(user_profile__enero=False)
+	elif id_mes=='2':
+		lista_consultar = User.objects.filter(user_profile__febrero=False)
+	elif id_mes=='3':
+		lista_consultar = User.objects.filter(user_profile__marzo=False)
+	elif id_mes=='4':
+		lista_consultar = User.objects.filter(user_profile__abril=False)
+	elif id_mes=='5':
+		lista_consultar = User.objects.filter(user_profile__mayo=False)
+	elif id_mes=='6':
+		lista_consultar = User.objects.filter(user_profile__junio=False)
+	elif id_mes=='7':
+		lista_consultar = User.objects.filter(user_profile__julio=False)
+	elif id_mes=='8':
+		lista_consultar = User.objects.filter(user_profile__agosto=False)
+	elif id_mes=='9':
+		lista_consultar = User.objects.filter(user_profile__septiembre=False)
+	elif id_mes=='10':
+		lista_consultar = User.objects.filter(user_profile__octubre=False)
+	elif id_mes=='11':
+		lista_consultar = User.objects.filter(user_profile__noviembre=False)
+	elif id_mes=='12':
+		lista_consultar = User.objects.filter(user_profile__diciembre=False)	
+	
+	usuarios = User.objects.filter(is_staff=False)
+	instructores = usuarios.count
+	tolal_reportes = lista_consultar.count
+	#tolal_reportes = 0
+	#for c in consultar_enero:
+	#	tolal_reportes=tolal_reportes+1
+	query = request.GET.get('q','')     
+	if query:
+		qset = (
+			Q(first_name__icontains=query)|
+			Q(last_name__icontains=query)|
+			Q(username__icontains=query)|
+			Q(email__icontains=query)
+		)
+		results = User.objects.filter(qset).distinct()  
+		mostrar = False      
+	else:
+		mostrar = True
+		results = []
+
+	paginator = Paginator(lista_consultar, 15) 
+	try:
+		page = int(pagina)
+	except:
+		page = 1
+	try:
+		consultar = paginator.page(page)
+	except (EmptyPage,InvalidPage):
+		consultar = paginator.page(paginator.num_pages)		
+		
+	return render_to_response('usuarios/consultar_sin_subir.html', {
+		"results": results,
+		"query": query,
+		"mostrar": mostrar,		
+		"consultar":consultar,
+		"total_reportes":tolal_reportes, 
+		"mes":mes,
+		"instructores":instructores,
+		"num_mes":num_mes,  
+		"primera":primera,
+		"ultima":ultima,     
+	},context_instance=RequestContext(request))
+
+
+	#ctx = {'consultar':consultar, 'total_reportes':tolal_reportes, 'mes':mes}
+	#return render(request, 'usuarios/consultar.html',ctx) 
+
 def consultar_view(request,pagina,id_mes):
 	meses = { '1':'ENERO', '2':'FEBRERO', '3':'MARZO', '4':'ABRIL', '5':'MAYO','6':'JUNIO','7':'JULIO','8':'AGOSTO','9':'SEPTIEMBRE','10':'OCTUBRE','11':'NOVIEMBRE','12':'DICIEMBRE' }	
 	mes = meses[id_mes]	
@@ -450,7 +583,3 @@ def consultar_view(request,pagina,id_mes):
 		"primera":primera,
 		"ultima":ultima,     
 	},context_instance=RequestContext(request))
-
-
-	#ctx = {'consultar':consultar, 'total_reportes':tolal_reportes, 'mes':mes}
-	#return render(request, 'usuarios/consultar.html',ctx) 

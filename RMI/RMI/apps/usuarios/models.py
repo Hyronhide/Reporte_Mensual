@@ -8,13 +8,33 @@ import os
 
 from django.db import models
 
+SUPERVISOR=(
+	('Julio Prado','Julio Prado '),
+	('Maria del Carmen','Maria del Carmen'),
+	('Janet Patricia','Janet Patricia'),
+	)
+
 class User_profile(models.Model):	
 
 	user     = models.OneToOneField(User)	
 	telefono = models.CharField(max_length=13)
+	supervisor = models.CharField(max_length=50, choices = SUPERVISOR,default='')
+	enero = models.BooleanField(default=False)
+	febrero = models.BooleanField(default=False)
+	marzo = models.BooleanField(default=False)
+	abril = models.BooleanField(default=False)
+	mayo = models.BooleanField(default=False)
+	junio = models.BooleanField(default=False)
+	julio = models.BooleanField(default=False)
+	agosto = models.BooleanField(default=False)
+	septiembre = models.BooleanField(default=False)
+	octubre = models.BooleanField(default=False)
+	noviembre = models.BooleanField(default=False)
+	diciembre = models.BooleanField(default=False)
+
 	
 	def __unicode__(self):
-		return self.user.username
+		return "Nombre: %s %s; Cedula: %s" % (self.user.first_name, self.user.last_name, self.user.username)
 #		
 class Reporte_Mensual(models.Model):
 
@@ -28,7 +48,7 @@ class Reporte_Mensual(models.Model):
 		return "MES: %s; NOMBRE ADJUNTO: %s; USUARIO: %s %s"  % (self.mes, self.nombre_adjunto, self.usuario.first_name , self.usuario.last_name)
 
 @receiver(pre_delete, sender=Reporte_Mensual)
-def _Reporte_Mensual_delete(sender, instance, using, **kwargs):
+def _Reporte_Mensual_delete(sender, instance, using, **kwargs):	
     file_path = settings.MEDIA_ROOT + str(instance.adjunto_exel)
     #print(file_path)
 
