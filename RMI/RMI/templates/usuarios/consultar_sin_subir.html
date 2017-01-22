@@ -89,19 +89,19 @@
 			<div class = "pagination">
 				<div class = "pagination pagination-centered">
 					<ul class="pag">
-						<li><a href="/consultar/page/1/{{num_mes}}"> {{primera}} </a></li>
+						<li><a href="/consultar_sin_subir/page/1/{{num_mes}}"> {{primera}} </a></li>
 						{% if consultar.has_previous %}
-							<li><a href="/consultar/page/{{ consultar.previous_page_number }}/{{num_mes}}" > Anterior</a></li>
+							<li><a href="/consultar_sin_subir/page/{{ consultar.previous_page_number }}/{{num_mes}}" > Anterior</a></li>
 						{% else %}
 							<li><a href="#">Anterior</a></li>
 						{% endif %}
 
 						{% if consultar.has_next %}
-							<li><a href="/consultar/page/{{ consultar.next_page_number }}/{{num_mes}}" > Siguiente</a></li>
+							<li><a href="/consultar_sin_subir/page/{{ consultar.next_page_number }}/{{num_mes}}" > Siguiente</a></li>
 						{% else %}
 							<li><a href="#"> Siguiente</a></li>	
 						{% endif %}
-							<li><a href="/consultar/page/{{ consultar.paginator.num_pages }}/{{num_mes}}"> {{ultima}} </a></li>
+							<li><a href="/consultar_sin_subir/page/{{ consultar.paginator.num_pages }}/{{num_mes}}"> {{ultima}} </a></li>
 					</ul>			
 				</div>		
 			</div>
