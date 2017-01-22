@@ -4,6 +4,11 @@ from django.contrib.auth.models import User
 from RMI.apps.usuarios.models import *
 #from django.forms.widgets import PasswordInput
 
+SUPERVISOR=(
+	('Julio Prado','Julio Prado '),
+	('Maria del Carmen','Maria del Carmen'),
+	('Janet Patricia','Janet Patricia'),
+	)
 
 class Login_form(forms.Form):
 
@@ -48,7 +53,7 @@ class AdminUserForm(forms.ModelForm):
 class User_profile_Form(forms.ModelForm):
 	class Meta:
 		model = User_profile
-		fields = ['telefono']	
+		fields = ['telefono','supervisor']	
 
 	telefono = forms.CharField(label="Teléfono",widget=forms.TextInput())	
 
@@ -59,6 +64,7 @@ class RegisterForm(forms.Form):
 	username = forms.CharField(label="Cedula",widget=forms.TextInput())
 	email    = forms.EmailField(label="Correo Electrónico",widget=forms.TextInput())
 	telefono = forms.CharField(label="Teléfono",widget=forms.TextInput())
+	supervisor = forms.CharField(label='Supervisor',max_length = 50,widget=forms.Select(choices=SUPERVISOR))
 	password_one = forms.CharField(label="Password",widget=forms.PasswordInput(render_value=False))
 	password_two = forms.CharField(label="Confirmar password",widget=forms.PasswordInput(render_value=False))	
 	

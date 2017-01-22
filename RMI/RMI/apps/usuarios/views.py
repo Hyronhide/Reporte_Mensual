@@ -45,7 +45,7 @@ def user_view(request):
 def admin_user_view(request, id_user): 
 	us = User.objects.get(id= id_user)
 	ctx={'user':us}
-	return render_to_response('usuarios/admin_user.html',ctx,context_instance = RequestContext(request))			
+	return render(request,'usuarios/admin_user.html',ctx)			
 
 def edit_user_view(request):
 	info = ""	
@@ -150,7 +150,7 @@ def admin_edit_password_view(request,id_user):
 			return HttpResponseRedirect ('/password_guardado_admin/')
 	else:
 		formulario = PasswordForm(instance = us)
-	ctx = {'form':formulario, 'informacion':info, 'info_enviado':info_enviado}	
+	ctx = {'form':formulario, 'informacion':info, 'info_enviado':info_enviado,'user':us}	
 	return render_to_response('usuarios/admin_edit_password.html',ctx,context_instance = RequestContext(request))				
 
 
@@ -258,9 +258,11 @@ def register_view(request):
 			password_one = form.cleaned_data['password_one']
 			password_two = form.cleaned_data['password_two']
 			telefono = form.cleaned_data['telefono']
+			supervisor  = form.cleaned_data['supervisor']
 			u = User.objects.create_user(first_name=nombres,last_name=apellidos,username=usuario,email=email,password=password_one)
 			user = user_form.save(commit=False)
 			user.telefono= telefono
+			user.supervisor = supervisor
 			user.user=u
 			#user= form.save(commit=False)
 			#user.user_profile.telefono=telefono
@@ -463,29 +465,29 @@ def consultar_sin_subir_view(request,pagina,id_mes):
 	primera = "<<Primera"
 	ultima = "Ultima>>"	
 	if id_mes=='1':
-		lista_consultar = User.objects.filter(user_profile__enero=False)
+		lista_consultar = User.objects.filter(user_profile__enero=False,is_staff=False)
 	elif id_mes=='2':
-		lista_consultar = User.objects.filter(user_profile__febrero=False)
+		lista_consultar = User.objects.filter(user_profile__febrero=False,is_staff=False)
 	elif id_mes=='3':
-		lista_consultar = User.objects.filter(user_profile__marzo=False)
+		lista_consultar = User.objects.filter(user_profile__marzo=False,is_staff=False)
 	elif id_mes=='4':
-		lista_consultar = User.objects.filter(user_profile__abril=False)
+		lista_consultar = User.objects.filter(user_profile__abril=False,is_staff=False)
 	elif id_mes=='5':
-		lista_consultar = User.objects.filter(user_profile__mayo=False)
+		lista_consultar = User.objects.filter(user_profile__mayo=False,is_staff=False)
 	elif id_mes=='6':
-		lista_consultar = User.objects.filter(user_profile__junio=False)
+		lista_consultar = User.objects.filter(user_profile__junio=False,is_staff=False)
 	elif id_mes=='7':
-		lista_consultar = User.objects.filter(user_profile__julio=False)
+		lista_consultar = User.objects.filter(user_profile__julio=False,is_staff=False)
 	elif id_mes=='8':
-		lista_consultar = User.objects.filter(user_profile__agosto=False)
+		lista_consultar = User.objects.filter(user_profile__agosto=False,is_staff=False)
 	elif id_mes=='9':
-		lista_consultar = User.objects.filter(user_profile__septiembre=False)
+		lista_consultar = User.objects.filter(user_profile__septiembre=False,is_staff=False)
 	elif id_mes=='10':
-		lista_consultar = User.objects.filter(user_profile__octubre=False)
+		lista_consultar = User.objects.filter(user_profile__octubre=False,is_staff=False)
 	elif id_mes=='11':
-		lista_consultar = User.objects.filter(user_profile__noviembre=False)
+		lista_consultar = User.objects.filter(user_profile__noviembre=False,is_staff=False)
 	elif id_mes=='12':
-		lista_consultar = User.objects.filter(user_profile__diciembre=False)	
+		lista_consultar = User.objects.filter(user_profile__diciembre=False,is_staff=False)	
 	
 	usuarios = User.objects.filter(is_staff=False)
 	instructores = usuarios.count
@@ -501,7 +503,32 @@ def consultar_sin_subir_view(request,pagina,id_mes):
 			Q(username__icontains=query)|
 			Q(email__icontains=query)
 		)
-		results = User.objects.filter(qset).distinct()  
+		if id_mes=='1':
+			results = User.objects.filter(qset,is_staff=False,user_profile__enero=False).distinct()			
+		elif id_mes=='2':
+			results = User.objects.filter(qset,is_staff=False,user_profile__febrero=False).distinct()			
+		elif id_mes=='3':
+			results = User.objects.filter(qset,is_staff=False,user_profile__marzo=False).distinct()			
+		elif id_mes=='4':
+			results = User.objects.filter(qset,is_staff=False,user_profile__abril=False).distinct()			
+		elif id_mes=='5':
+			results = User.objects.filter(qset,is_staff=False,user_profile__mayo=False).distinct()			
+		elif id_mes=='6':
+			results = User.objects.filter(qset,is_staff=False,user_profile__junio=False).distinct()			
+		elif id_mes=='7':
+			results = User.objects.filter(qset,is_staff=False,user_profile__julio=False).distinct()			
+		elif id_mes=='8':
+			results = User.objects.filter(qset,is_staff=False,user_profile__agosto=False).distinct()			
+		elif id_mes=='9':
+			results = User.objects.filter(qset,is_staff=False,user_profile__septiembre=False).distinct()			
+		elif id_mes=='10':
+			results = User.objects.filter(qset,is_staff=False,user_profile__octubre=False).distinct()			
+		elif id_mes=='11':
+			results = User.objects.filter(qset,is_staff=False,user_profile__noviembre=False).distinct()			
+		elif id_mes=='12':
+			results = User.objects.filter(qset,is_staff=False,user_profile__diciembre=False).distinct()			
+
+		#results = User.objects.filter(qset,is_staff=False).distinct()  
 		mostrar = False      
 	else:
 		mostrar = True

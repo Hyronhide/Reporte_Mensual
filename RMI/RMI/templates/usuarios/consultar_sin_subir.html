@@ -7,7 +7,7 @@
 {% block content %}
 <div align="center">
     <div id="car" class="card z-depth-3 hoverable" >
-		<h5 id="cn" align="center "><p><b>{{mes}}</b>: TOTAL REPORTES <b>{{total_reportes}}</b> DE <b>{{instructores}}</b> INSTRUCTORES REGISTRADOS SIN SUBIR</p></h5>
+		<h5 id="cn" align="center "><p><b>{{mes}}</b>: <b>{{total_reportes}}</b> DE <b>{{instructores}}</b> INSTRUCTORES NO HAN SUBIDO REPORTE</p></h5>
 		<div class="divider"></div><br>
 		<br>
 		<div >
@@ -34,7 +34,7 @@
 							<th>Apellidos</th>	
 							<th>Cedula</th>	
 							<th>Correo</th>
-							
+							<th>Supervisor</th>
 							<th></th>												
 						</tr>
 					</theader>					
@@ -45,7 +45,7 @@
 							<td>{{ c.last_name }}</td>
 							<td>{{ c.username}}</td>	
 							<td>{{ c.email }}</td>					
-							
+							<td>{{ c.user_profile.supervisor}}</td>
 						</tr>
 						{% endfor %}			
 					</tbody>							
@@ -65,7 +65,7 @@
 								<th>Apellidos</th>	
 								<th>Cedula</th>	
 								<th>Correo</th>
-							
+								<th>Supervisor</th>
 							<th></th>												
 						</tr>
 						</theader>					
@@ -76,7 +76,7 @@
 								<td>{{ c.last_name }}</td>
 								<td>{{ c.username}}</td>	
 								<td>{{ c.email }}</td>					
-								
+								<td>{{ c.user_profile.supervisor}}</td>
 							</tr>
 							{% endfor %}			
 						</tbody>							
@@ -110,7 +110,7 @@
 			{% endif %}									
 		{% endif %}
 		<br>
-		<center><a href="{% url 'vista_index' %}">Volver al inicio</a></center>
+		<center><a href="/consultar/page/1/{{num_mes}}">Volver a consultar reportes subidos</a></center>
 			
 	</div>			
 </div>	
