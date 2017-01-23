@@ -9,6 +9,8 @@ from django.contrib.auth.models import User ##
 from RMI.apps.usuarios.models import *
 from django.db.models import Q
 from django.core.paginator import Paginator, EmptyPage, InvalidPage#paginator
+from django.http.response import HttpResponse
+from openpyxl import Workbook
 import os 
 
 
@@ -457,7 +459,70 @@ def del_reporte_enero_view(request, id_reporte):
 				
 
 #############################################	CONSULTAR REPORTES POR MES #####################################################
+
 '''
+def reporte_exel_view(request,id_mes):
+	meses = { '1':'ENERO', '2':'FEBRERO', '3':'MARZO', '4':'ABRIL', '5':'MAYO','6':'JUNIO','7':'JULIO','8':'AGOSTO','9':'SEPTIEMBRE','10':'OCTUBRE','11':'NOVIEMBRE','12':'DICIEMBRE' }	
+	mes = meses[id_mes]	
+
+	if id_mes=='1':
+		lista_consultar = User.objects.filter(user_profile__enero=False,is_staff=False)
+	elif id_mes=='2':
+		lista_consultar = User.objects.filter(user_profile__febrero=False,is_staff=False)
+	elif id_mes=='3':
+		lista_consultar = User.objects.filter(user_profile__marzo=False,is_staff=False)
+	elif id_mes=='4':
+		lista_consultar = User.objects.filter(user_profile__abril=False,is_staff=False)
+	elif id_mes=='5':
+		lista_consultar = User.objects.filter(user_profile__mayo=False,is_staff=False)
+	elif id_mes=='6':
+		lista_consultar = User.objects.filter(user_profile__junio=False,is_staff=False)
+	elif id_mes=='7':
+		lista_consultar = User.objects.filter(user_profile__julio=False,is_staff=False)
+	elif id_mes=='8':
+		lista_consultar = User.objects.filter(user_profile__agosto=False,is_staff=False)
+	elif id_mes=='9':
+		lista_consultar = User.objects.filter(user_profile__septiembre=False,is_staff=False)
+	elif id_mes=='10':
+		lista_consultar = User.objects.filter(user_profile__octubre=False,is_staff=False)
+	elif id_mes=='11':
+		lista_consultar = User.objects.filter(user_profile__noviembre=False,is_staff=False)
+	elif id_mes=='12':
+		lista_consultar = User.objects.filter(user_profile__diciembre=False,is_staff=False)
+
+	wb = Workbook()
+	#Definimos como nuestra hoja de trabajo, la hoja activa, por defecto la primera del libro
+	ws = wb.active
+	#En la celda B1 ponemos el texto 'REPORTE DE PERSONAS'
+	ws['B1'] = 'REPORTE DE INSTRUCTORES %s'%(mes)
+	#Juntamos las celdas desde la B1 hasta la E1, formando una sola celda
+	ws.merge_cells('B1:E1')
+	#Creamos los encabezados desde la celda B3 hasta la E3
+	ws['B3'] = 'NOMBRES'
+	ws['C3'] = 'APELLIDOS'
+	ws['D3'] = 'CEDULA'
+	ws['E3'] = 'CORREO' 
+	ws['F3'] = 'TELEFONO' 
+	ws['G3'] = 'SUPERVISOR'      
+	cont=4
+	#Recorremos el conjunto de personas y vamos escribiendo cada uno de los datos en las celdas
+	for persona in lista_consultar:
+		ws.cell(row=cont,column=2).value = persona.first_name
+		ws.cell(row=cont,column=3).value = persona.last_name
+		ws.cell(row=cont,column=4).value = persona.username
+		ws.cell(row=cont,column=5).value = persona.email
+		ws.cell(row=cont,column=6).value = persona.user_profile.telefono
+		ws.cell(row=cont,column=7).value = persona.user_profile.supervisor
+		cont = cont + 1
+	#Establecemos el nombre del archivo
+	nombre_archivo ="ReporteInstructores%s.xlsx"%(mes)
+	#Definimos que el tipo de respuesta a devolver es un archivo de microsoft excel
+	response = HttpResponse(content_type="application/ms-excel") 
+	contenido = "attachment; filename={0}".format(nombre_archivo)
+	response["Content-Disposition"] = contenido
+	wb.save(response)
+	return response	
+
 def consultar_sin_subir_view(request,pagina,id_mes):
 	meses = { '1':'ENERO', '2':'FEBRERO', '3':'MARZO', '4':'ABRIL', '5':'MAYO','6':'JUNIO','7':'JULIO','8':'AGOSTO','9':'SEPTIEMBRE','10':'OCTUBRE','11':'NOVIEMBRE','12':'DICIEMBRE' }	
 	mes = meses[id_mes]	

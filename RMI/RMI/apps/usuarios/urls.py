@@ -21,6 +21,7 @@ urlpatterns = [
 	url(r'^consultar/page/(?P<pagina>.*)/(?P<id_mes>.*)/$',consultar_view , name = 'vista_consultar'),
 	url(r'^consultar_sin_subir/page/(?P<pagina>.*)/(?P<id_mes>.*)/$',consultar_sin_subir_view , name = 'vista_consultar_sin_subir'),
 	url(r'^admin_edit_user/(?P<id_user>.*)/$',admin_edit_user_view, name = 'vista_admin_edit_user'),
+	url(r'^reporte_exel/(?P<id_mes>.*)/$',reporte_exel_view, name = 'vista_reporte_exel'),
 
 	url(r'^del/reporte/(?P<id_reporte>.*)/$',del_reporte_view, name = 'vista_eliminar_reporte'),	
 	#url(r'^del/reporte_enero/(?P<id_reporte>.*)/$',del_reporte_enero_view, name = 'vista_eliminar_reporte_enero'),
