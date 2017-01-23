@@ -43,7 +43,7 @@
 						<tr>
 							<td>{{ c.usuario.first_name }}</td>
 							<td>{{ c.usuario.last_name }}</td>
-							<td>{{ c.fecha|date:"d/m/Y, H:M" }}</td>	
+							<td>{{ c.fecha|date:"d/m/Y, H:i" }}</td>	
 							<td>{{ c.nombre_adjunto }}</td>
 							
 							<td><a href="{{c.adjunto_exel.url}} " title="">(Descargar)</a></td>						
@@ -75,7 +75,7 @@
 							<tr>
 								<td>{{ c.usuario.first_name }}</td>
 								<td>{{ c.usuario.last_name }}</td>
-								<td>{{ c.fecha|date:"d/m/Y" }}</td>	
+								<td>{{ c.fecha|date:"d/m/Y, H:i" }}</td>	
 								<td>{{ c.nombre_adjunto }}</td>
 								
 								<td><a href="{{c.adjunto_exel.url}} " title="">(Descargar)</a></td>						
