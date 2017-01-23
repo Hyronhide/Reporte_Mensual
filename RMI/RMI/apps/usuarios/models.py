@@ -12,6 +12,7 @@ SUPERVISOR=(
 	('Julio Prado','Julio Prado '),
 	('Maria del Carmen','Maria del Carmen'),
 	('Janet Patricia','Janet Patricia'),
+	('No tiene','No tiene'),
 	)
 
 class User_profile(models.Model):	
