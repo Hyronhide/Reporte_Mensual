@@ -7,7 +7,8 @@ from RMI.apps.usuarios.models import *
 SUPERVISOR=(
 	('Julio Prado','Julio Prado '),
 	('Maria del Carmen','Maria del Carmen'),
-	('Janet Patricia','Janet Patricia'),
+	('Janeth Patricia','Janeth Patricia'),
+	('No tiene','No tiene'),
 	)
 
 class Login_form(forms.Form):

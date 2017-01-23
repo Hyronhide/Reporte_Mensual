@@ -46,7 +46,7 @@ def user_view(request):
 
 def admin_user_view(request, id_user): 
 	us = User.objects.get(id= id_user)
-	ctx={'user':us}
+	ctx={'usuario':us}
 	return render(request,'usuarios/admin_user.html',ctx)			
 
 def edit_user_view(request):
@@ -275,7 +275,7 @@ def register_view(request):
 			u.save()# Guarda el objeto
 			#u.user_profile.telefono=telefono
 			#u.save()
-			ctx = {'user':u}
+			ctx = {'usuario':u}
 			return render_to_response('usuarios/thanks_register.html',ctx,context_instance=RequestContext(request))
 		else:		
 			ctx = {'form':form}
