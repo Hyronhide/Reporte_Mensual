@@ -10,6 +10,8 @@ from RMI.apps.usuarios.models import *
 from django.db.models import Q
 from django.core.paginator import Paginator, EmptyPage, InvalidPage#paginator
 from django.http.response import HttpResponse
+from django.core.mail import EmailMultiAlternatives
+from django.contrib import messages
 from openpyxl import Workbook
 import os 
 
@@ -369,7 +371,31 @@ def reportes_view(request, id_mes):
 			elif id_mes=='12':
 				user.user_profile.diciembre=True
 
-			user.user_profile.save()						
+			user.user_profile.save()
+			#to_admin = 'lgonzalez21@misena.edu.co'
+			to_admin = 'drmosquera90@misena.edu.co'
+			to_admin_2 = 'alexandrajr@misena.edu.co'
+			#to_user = correo
+			html_content_admin = "<p>El instrutor <b>%s %s</b> ha subido un archivo</p><br><p>http://reportemensualinstructor.herokuapp.com%s</p>"%(user.first_name,user.last_name,reporte.adjunto_exel.url)
+			#html_content_user = "<p><b>Solicitud de servicio: </b>%s</p> <!--<p><b>Codigo de radicado:</b> %s</p>--> <p><b>Apreciado usuario, su solicitud será respondida en un termino maximo de 24 horas, por favor tenga en cuenta siguientes instrucciones:</b></p> 1. Debe imprimir únicamente copia que hace referencia al banco, importante: DEBE IMPRIMIR EL RECIBO EN IMPRESORA LASER.<br>2. Debe hacer consignación en sucursales Bancolombia(no corresponsales bancarios).<br>3. Una vez consigne o cancele su recibo debe hacerlos llegar a las oficinas de coordinación académica según su solicitud ,en este caso:  %s.<br>4. La consignación debe hacerse el mismo día que se genera el recibo."%(servicio,codigo_parsear,servicio_usuario)
+
+			msg = EmailMultiAlternatives('Instructor %s %s'%(user.first_name,user.last_name), html_content_admin, 'from@gmail.com',[to_admin])
+			msg2 = EmailMultiAlternatives('Instructor %s %s'%(user.first_name,user.last_name), html_content_admin, 'from@gmail.com',[to_admin_2])
+			#msg2 = EmailMultiAlternatives('Solicitud de recibo de consignacion %s (Recuerde esto al momento de obtener el recibo)'%(codigo_parsear), html_content_user, 'from@gmail.com',[to_user])
+			msg.attach_alternative(html_content_admin,'text/html')			
+			msg2.attach_alternative(html_content_admin,'text/html')			
+			msg.send()
+			msg2.send()
+			#form_status= formulario.save(commit=False)
+			#if msg.send:
+			#	form_status.status_admin=True
+			#	info_enviado_admin = True
+			#if msg2.send:
+			#	form_status.status_user=True
+			#	info_enviado_user = True
+
+			#form_status.save()
+
 	else:
 		form = Reporte()
 
@@ -632,7 +658,7 @@ def consultar_view(request,pagina,id_mes):
 	num_mes = id_mes
 	primera = "<<Primera"
 	ultima = "Ultima>>"	
-	lista_consultar = Reporte_Mensual.objects.filter(mes=mes)
+	lista_consultar = Reporte_Mensual.objects.filter(mes=mes).order_by('fecha')
 	usuarios = User.objects.filter(is_staff=False)
 	instructores = usuarios.count
 	tolal_reportes = lista_consultar.count
