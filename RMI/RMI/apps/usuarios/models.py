@@ -47,7 +47,7 @@ class Reporte_Mensual(models.Model):
 
 	def __unicode__(self):
 		return "MES: %s; NOMBRE ADJUNTO: %s; USUARIO: %s %s"  % (self.mes, self.nombre_adjunto, self.usuario.first_name , self.usuario.last_name)
-'''
+
 @receiver(pre_delete, sender=Reporte_Mensual)
 def _Reporte_Mensual_delete(sender, instance, using, **kwargs):	
     file_path = settings.MEDIA_ROOT + str(instance.adjunto_exel)
@@ -55,4 +55,4 @@ def _Reporte_Mensual_delete(sender, instance, using, **kwargs):
 
     if os.path.isfile(file_path):
         os.remove(file_path)	
-'''        
+      
