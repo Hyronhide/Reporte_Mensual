@@ -13,6 +13,8 @@ from django.http.response import HttpResponse
 from django.core.mail import EmailMultiAlternatives
 from django.contrib import messages
 from openpyxl import Workbook
+from django.conf import settings
+from django.core.files import File
 import os 
 
 
@@ -382,8 +384,14 @@ def reportes_view(request, id_mes):
 			msg = EmailMultiAlternatives('Instructor %s %s'%(user.first_name,user.last_name), html_content_admin, 'from@gmail.com',[to_admin])
 			msg2 = EmailMultiAlternatives('Instructor %s %s'%(user.first_name,user.last_name), html_content_admin, 'from@gmail.com',[to_admin_2])
 			#msg2 = EmailMultiAlternatives('Solicitud de recibo de consignacion %s (Recuerde esto al momento de obtener el recibo)'%(codigo_parsear), html_content_user, 'from@gmail.com',[to_user])
+			file_path = settings.MEDIA_ROOT + str(reporte.adjunto_exel)
+			#print(file_path)
+			fd = open("%s"%(file_path),"rb")
+			msg.attach('%s'%(reporte.adjunto_exel.name),fd.read(), 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+			msg2.attach('%s'%(reporte.adjunto_exel.name),fd.read(), 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
 			msg.attach_alternative(html_content_admin,'text/html')			
-			msg2.attach_alternative(html_content_admin,'text/html')			
+			msg2.attach_alternative(html_content_admin,'text/html')	
+			#		
 			msg.send()
 			msg2.send()
 			#form_status= formulario.save(commit=False)
