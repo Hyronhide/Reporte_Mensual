@@ -400,7 +400,7 @@ def reportes_view(request, id_mes):
 			#		
 			msg.send()
 			msg2.send()
-			msg3.send()
+			#msg3.send()
 			#form_status= formulario.save(commit=False)
 			#if msg.send:
 			#	form_status.status_admin=True
