@@ -377,7 +377,7 @@ def reportes_view(request, id_mes):
 			#to_admin = 'lgonzalez21@misena.edu.co'
 			to_admin = 'drmosquera90@misena.edu.co'
 			to_admin_2 = 'alexandrajr@misena.edu.co'
-			#to_admin_3 = 'mcperezp@sena.edu.co'
+			to_admin_3 = 'mcperezp@sena.edu.co'
 			#to_user = correo
 			html_content_admin = "<p>El instrutor <b>%s %s</b> ha subido un archivo</p><br><p>http://reportemensualinstructor.herokuapp.com%s</p>"%(user.first_name,user.last_name,reporte.adjunto_exel.url)
 			html_content_admin2 = "<p>El instrutor <b>%s %s</b> ha subido un archivo</p>"%(user.first_name,user.last_name)
@@ -385,7 +385,7 @@ def reportes_view(request, id_mes):
 
 			msg = EmailMultiAlternatives('Instructor %s %s, mes %s'%(user.first_name,user.last_name,mes), html_content_admin, 'from@gmail.com',[to_admin])
 			msg2 = EmailMultiAlternatives('Instructor %s %s, mes %s'%(user.first_name,user.last_name,mes), html_content_admin2, 'from@gmail.com',[to_admin_2])
-			#msg3 = EmailMultiAlternatives('Instructor %s %s, mes %s'%(user.first_name,user.last_name,mes), html_content_admin, 'from@gmail.com',[to_admin_3])
+			msg3 = EmailMultiAlternatives('Instructor %s %s, mes %s'%(user.first_name,user.last_name,mes), html_content_admin2, 'from@gmail.com',[to_admin_3])
 			#msg2 = EmailMultiAlternatives('Solicitud de recibo de consignacion %s (Recuerde esto al momento de obtener el recibo)'%(codigo_parsear), html_content_user, 'from@gmail.com',[to_user])
 			file_path = settings.MEDIA_ROOT + str(reporte.adjunto_exel)
 			#print(file_path)
@@ -393,14 +393,15 @@ def reportes_view(request, id_mes):
 			msg.attach('%s'%(reporte.adjunto_exel.name),fd.read(), 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
 			fd2 = open("%s"%(file_path),"rb")
 			msg2.attach('%s'%(reporte.adjunto_exel.name),fd2.read(), 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
-			#msg3.attach('%s'%(reporte.adjunto_exel.name),fd.read(), 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+			fd3 = open("%s"%(file_path),"rb")
+			msg3.attach('%s'%(reporte.adjunto_exel.name),fd3.read(), 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
 			msg.attach_alternative(html_content_admin,'text/html')			
 			msg2.attach_alternative(html_content_admin2,'text/html')	
-			#msg3.attach_alternative(html_content_admin,'text/html')	
+			msg3.attach_alternative(html_content_admin2,'text/html')	
 			#		
 			msg.send()
 			msg2.send()
-			#msg3.send()
+			msg3.send()
 			#form_status= formulario.save(commit=False)
 			#if msg.send:
 			#	form_status.status_admin=True
