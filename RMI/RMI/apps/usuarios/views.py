@@ -380,11 +380,11 @@ def reportes_view(request, id_mes):
 			#to_admin_3 = 'mcperezp@sena.edu.co'
 			#to_user = correo
 			html_content_admin = "<p>El instrutor <b>%s %s</b> ha subido un archivo</p><br><p>http://reportemensualinstructor.herokuapp.com%s</p>"%(user.first_name,user.last_name,reporte.adjunto_exel.url)
-			#html_content_admin2 = "<p>El instrutor <b>%s %s</b> ha subido un archivo</p>"%(user.first_name,user.last_name)
+			html_content_admin2 = "<p>El instrutor <b>%s %s</b> ha subido un archivo</p>"%(user.first_name,user.last_name)
 			#html_content_user = "<p><b>Solicitud de servicio: </b>%s</p> <!--<p><b>Codigo de radicado:</b> %s</p>--> <p><b>Apreciado usuario, su solicitud será respondida en un termino maximo de 24 horas, por favor tenga en cuenta siguientes instrucciones:</b></p> 1. Debe imprimir únicamente copia que hace referencia al banco, importante: DEBE IMPRIMIR EL RECIBO EN IMPRESORA LASER.<br>2. Debe hacer consignación en sucursales Bancolombia(no corresponsales bancarios).<br>3. Una vez consigne o cancele su recibo debe hacerlos llegar a las oficinas de coordinación académica según su solicitud ,en este caso:  %s.<br>4. La consignación debe hacerse el mismo día que se genera el recibo."%(servicio,codigo_parsear,servicio_usuario)
 
 			msg = EmailMultiAlternatives('Instructor %s %s, mes %s'%(user.first_name,user.last_name,mes), html_content_admin, 'from@gmail.com',[to_admin])
-			msg2 = EmailMultiAlternatives('Instructor %s %s, mes %s'%(user.first_name,user.last_name,mes), html_content_admin, 'from@gmail.com',[to_admin_2])
+			msg2 = EmailMultiAlternatives('Instructor %s %s, mes %s'%(user.first_name,user.last_name,mes), html_content_admin2, 'from@gmail.com',[to_admin_2])
 			#msg3 = EmailMultiAlternatives('Instructor %s %s, mes %s'%(user.first_name,user.last_name,mes), html_content_admin, 'from@gmail.com',[to_admin_3])
 			#msg2 = EmailMultiAlternatives('Solicitud de recibo de consignacion %s (Recuerde esto al momento de obtener el recibo)'%(codigo_parsear), html_content_user, 'from@gmail.com',[to_user])
 			file_path = settings.MEDIA_ROOT + str(reporte.adjunto_exel)
@@ -395,7 +395,7 @@ def reportes_view(request, id_mes):
 			msg2.attach('%s'%(reporte.adjunto_exel.name),fd2.read(), 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
 			#msg3.attach('%s'%(reporte.adjunto_exel.name),fd.read(), 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
 			msg.attach_alternative(html_content_admin,'text/html')			
-			msg2.attach_alternative(html_content_admin,'text/html')	
+			msg2.attach_alternative(html_content_admin2,'text/html')	
 			#msg3.attach_alternative(html_content_admin,'text/html')	
 			#		
 			msg.send()
