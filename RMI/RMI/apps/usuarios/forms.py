@@ -11,6 +11,29 @@ SUPERVISOR=(
 	('No tiene','No tiene'),
 	)
 
+AREA=(
+	('Electricidad','Electricidad'),
+	('Electrónica','Electrónica'),
+	('Mantenimiento y Redes de Computadores','Mantenimiento y Redes de Computadores'),
+	('Transversales','Transversales'),
+	('Telecomunicaciones','Telecomunicaciones'),
+	('Confecciones','Confecciones'),
+	('Actividad Física','Actividad Física'),
+	('Ebanistería','Ebanistería'),
+	('Marroquinería','Marroquinería'),
+	('Joyería','Joyería'),
+	('Inglés','Inglés'),
+	('Construcción','Construcción'),
+	('Desarrollo de Software','Desarrollo de Software'),
+	('Industrias Creativas','Industrias Creativas'),
+	('Gestión Empresarial','Gestión Empresarial'),
+	('Mecánica','Mecánica'),
+	('Minería','Minería'),
+	('Ambiental','Ambiental'),
+	('Soldadura ','Soldadura '),	
+	('No tiene','No tiene'),
+	)
+
 class Login_form(forms.Form):
 
 	usuario = forms.CharField(label="Cedula",widget = forms.TextInput())	
@@ -54,7 +77,7 @@ class AdminUserForm(forms.ModelForm):
 class User_profile_Form(forms.ModelForm):
 	class Meta:
 		model = User_profile
-		fields = ['telefono','supervisor']	
+		fields = ['telefono','supervisor','area']	
 
 	telefono = forms.CharField(label="Teléfono",widget=forms.TextInput())	
 
@@ -66,6 +89,7 @@ class RegisterForm(forms.Form):
 	email    = forms.EmailField(label="Correo Electrónico",widget=forms.TextInput())
 	telefono = forms.CharField(label="Teléfono",widget=forms.TextInput())
 	supervisor = forms.CharField(label='Supervisor',max_length = 50,widget=forms.Select(choices=SUPERVISOR))
+	area = forms.CharField(label='Area',max_length = 50,widget=forms.Select(choices=AREA))
 	password_one = forms.CharField(label="Password",widget=forms.PasswordInput(render_value=False))
 	password_two = forms.CharField(label="Confirmar password",widget=forms.PasswordInput(render_value=False))	
 	

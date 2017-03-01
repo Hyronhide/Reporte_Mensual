@@ -15,11 +15,36 @@ SUPERVISOR=(
 	('No tiene','No tiene'),
 	)
 
+AREA=(
+	('Electricidad','Electricidad'),
+	('Electrónica','Electrónica'),
+	('Mantenimiento y Redes de Computadores','Mantenimiento y Redes de Computadores'),
+	('Transversales','Transversales'),
+	('Telecomunicaciones','Telecomunicaciones'),
+	('Confecciones','Confecciones'),
+	('Actividad Física','Actividad Física'),
+	('Ebanistería','Ebanistería'),
+	('Marroquinería','Marroquinería'),
+	('Joyería','Joyería'),
+	('Inglés','Inglés'),
+	('Construcción','Construcción'),
+	('Desarrollo de Software','Desarrollo de Software'),
+	('Industrias Creativas','Industrias Creativas'),
+	('Gestión Empresarial','Gestión Empresarial'),
+	('Mecánica','Mecánica'),
+	('Minería','Minería'),
+	('Ambiental','Ambiental'),
+	('Soldadura ','Soldadura '),
+	('No tiene','No tiene'),	
+	)
+
 class User_profile(models.Model):	
 
 	user     = models.OneToOneField(User)	
 	telefono = models.CharField(max_length=13)
 	supervisor = models.CharField(max_length=50, choices = SUPERVISOR,default='')
+	area = models.CharField(max_length=50, choices = AREA,default='')
+	lider_area= models.BooleanField(default=False)
 	enero = models.BooleanField(default=False)
 	febrero = models.BooleanField(default=False)
 	marzo = models.BooleanField(default=False)

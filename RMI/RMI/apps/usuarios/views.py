@@ -335,7 +335,19 @@ def reportes_view(request, id_mes):
 	mes = meses[id_mes]	
 	
 	reporte_validar = Reporte_Mensual.objects.filter(mes= mes,usuario__id= request.user.id )
-	user = User.objects.get(id= request.user.id )	
+	user = User.objects.get(id= request.user.id )
+	usuarios_area= User.objects.filter(user_profile__area=user.user_profile.area)	
+	#nombre_adjunto = ""	
+	ctx={'reporte_validar':reporte_validar, 'mes':mes, 'user':user, 'usuarios_area':usuarios_area}
+
+	return render(request, 'usuarios/reportes.html',ctx) 	
+
+def reportes_lider_view(request, mes, id_user):
+	meses = { 'ENERO': '1', 'FEBRERO': '2', 'MARZO': '3', 'ABRIL':'4', 'MAYO':'5', 'JUNIO':'6', 'JULIO':'7', 'AGOSTO':'8', 'SEPTIEMBRE':'9', 'OCTUBRE':'10', 'NOVIEMBRE':'11', 'DICIEMBRE':'12' }	
+	id_mes = meses[mes]	
+	
+	reporte_validar = Reporte_Mensual.objects.filter(mes= mes,usuario__id= id_user )
+	user = User.objects.get(id= id_user )	
 	nombre_adjunto = ""	
 	info_enviado = False
 	if request.method == "POST":		
@@ -344,7 +356,7 @@ def reportes_view(request, id_mes):
 			info_enviado = True
 			nombre_adjunto = form.cleaned_data['nombre_adjunto']											
 			reporte = form.save(commit = False)
-			reporte.usuario = request.user	
+			reporte.usuario = user	
 			reporte.mes = mes			
 			reporte.save()
 
@@ -379,29 +391,29 @@ def reportes_view(request, id_mes):
 			to_admin_2 = 'alexandrajr@misena.edu.co'
 			to_admin_3 = 'mcperezp@sena.edu.co'
 			#to_user = correo
-			html_content_admin = "<p>El instrutor <b>%s %s</b> ha subido un archivo</p><br><p>http://reportemensualinstructor.herokuapp.com%s</p>"%(user.first_name,user.last_name,reporte.adjunto_exel.url)
-			html_content_admin2 = "<p>El instrutor <b>%s %s</b> ha subido un archivo</p>"%(user.first_name,user.last_name)
+			html_content_admin = "<p>El instructor <b>%s %s</b> ha subido un archivo</p><br><p>http://reportemensualinstructor.herokuapp.com%s</p>"%(user.first_name,user.last_name,reporte.adjunto_exel.url)
+			html_content_admin2 = "<p>El instructor <b>%s %s</b> ha subido un archivo</p>"%(user.first_name,user.last_name)
 			#html_content_user = "<p><b>Solicitud de servicio: </b>%s</p> <!--<p><b>Codigo de radicado:</b> %s</p>--> <p><b>Apreciado usuario, su solicitud será respondida en un termino maximo de 24 horas, por favor tenga en cuenta siguientes instrucciones:</b></p> 1. Debe imprimir únicamente copia que hace referencia al banco, importante: DEBE IMPRIMIR EL RECIBO EN IMPRESORA LASER.<br>2. Debe hacer consignación en sucursales Bancolombia(no corresponsales bancarios).<br>3. Una vez consigne o cancele su recibo debe hacerlos llegar a las oficinas de coordinación académica según su solicitud ,en este caso:  %s.<br>4. La consignación debe hacerse el mismo día que se genera el recibo."%(servicio,codigo_parsear,servicio_usuario)
 
 			msg = EmailMultiAlternatives('Instructor %s %s, mes %s'%(user.first_name,user.last_name,mes), html_content_admin, 'from@gmail.com',[to_admin])
-			msg2 = EmailMultiAlternatives('Instructor %s %s, mes %s'%(user.first_name,user.last_name,mes), html_content_admin2, 'from@gmail.com',[to_admin_2])
-			msg3 = EmailMultiAlternatives('Instructor %s %s, mes %s'%(user.first_name,user.last_name,mes), html_content_admin2, 'from@gmail.com',[to_admin_3])
+			#msg2 = EmailMultiAlternatives('Instructor %s %s, mes %s'%(user.first_name,user.last_name,mes), html_content_admin2, 'from@gmail.com',[to_admin_2])
+			#msg3 = EmailMultiAlternatives('Instructor %s %s, mes %s'%(user.first_name,user.last_name,mes), html_content_admin2, 'from@gmail.com',[to_admin_3])
 			#msg2 = EmailMultiAlternatives('Solicitud de recibo de consignacion %s (Recuerde esto al momento de obtener el recibo)'%(codigo_parsear), html_content_user, 'from@gmail.com',[to_user])
 			file_path = settings.MEDIA_ROOT + str(reporte.adjunto_exel)
 			#print(file_path)
 			fd = open("%s"%(file_path),"rb")
 			msg.attach('%s'%(reporte.adjunto_exel.name),fd.read(), 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
-			fd2 = open("%s"%(file_path),"rb")
-			msg2.attach('%s'%(reporte.adjunto_exel.name),fd2.read(), 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
-			fd3 = open("%s"%(file_path),"rb")
-			msg3.attach('%s'%(reporte.adjunto_exel.name),fd3.read(), 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+			#fd2 = open("%s"%(file_path),"rb")
+			#msg2.attach('%s'%(reporte.adjunto_exel.name),fd2.read(), 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+			#fd3 = open("%s"%(file_path),"rb")
+			#msg3.attach('%s'%(reporte.adjunto_exel.name),fd3.read(), 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
 			msg.attach_alternative(html_content_admin,'text/html')			
-			msg2.attach_alternative(html_content_admin2,'text/html')	
-			msg3.attach_alternative(html_content_admin2,'text/html')	
+			#msg2.attach_alternative(html_content_admin2,'text/html')	
+			#msg3.attach_alternative(html_content_admin2,'text/html')	
 			#		
 			msg.send()
-			msg2.send()
-			msg3.send()
+			#msg2.send()
+			#msg3.send()
 			#form_status= formulario.save(commit=False)
 			#if msg.send:
 			#	form_status.status_admin=True
@@ -415,9 +427,9 @@ def reportes_view(request, id_mes):
 	else:
 		form = Reporte()
 
-	ctx={'reporte_validar':reporte_validar, 'form':form, 'mes':mes}
+	ctx={'reporte_validar':reporte_validar, 'form':form, 'mes':mes, 'user':user, 'id_mes':id_mes}
 
-	return render(request, 'usuarios/reportes.html',ctx) 	
+	return render(request, 'usuarios/reportes_lider.html',ctx) 		
 ######################################################################################
 '''
 def enero_view(request):
@@ -441,9 +453,9 @@ def enero_view(request):
 	return render(request, 'usuarios/enero.html',ctx) 	
 '''
 ############################################### 	BORRAR REPORTES MESES    ############################################
-def del_reporte_view(request, id_reporte):
+def del_reporte_view(request, id_reporte, id_user):
 	info = "inicializando"
-	user = User.objects.get(id= request.user.id )	
+	user = User.objects.get(id= id_user )	
 	try:
 		rep = Reporte_Mensual.objects.get(id = id_reporte)
 		mes = rep.mes
@@ -480,7 +492,7 @@ def del_reporte_view(request, id_reporte):
 		user.user_profile.save()
 		#rep.adjunto_exel.url.delete()
 		info = "El reporte ha sido eliminado correctamente"
-		return HttpResponseRedirect('/reportes/%s'%(mes_num))
+		return HttpResponseRedirect('/reportes_lider/%s/%s'%(mes,id_user))
 	except:
 		info = "EL reporte no se puede eliminar"
 		#return render_to_response('home/productos.html', context_instance = RequestContext(request))
