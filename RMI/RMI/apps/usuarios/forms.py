@@ -30,7 +30,8 @@ AREA=(
 	('Mecánica','Mecánica'),
 	('Minería','Minería'),
 	('Ambiental','Ambiental'),
-	('Soldadura ','Soldadura '),	
+	('Soldadura ','Soldadura '),
+	('Virtualismo','Virtualismo'),	
 	('No tiene','No tiene'),
 	)
 
