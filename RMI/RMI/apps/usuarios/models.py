@@ -36,6 +36,7 @@ AREA=(
 	('Ambiental','Ambiental'),
 	('Soldadura ','Soldadura '),
 	('Virtualismo','Virtualismo'),
+	('Tecnico en sistemas','Tecnico en sistemas'),
 	('No tiene','No tiene'),	
 	)
 
