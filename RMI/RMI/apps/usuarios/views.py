@@ -333,12 +333,15 @@ def instructores_view(request,pagina):
 def reportes_view(request, id_mes):
 	meses = { '1':'ENERO', '2':'FEBRERO', '3':'MARZO', '4':'ABRIL', '5':'MAYO','6':'JUNIO','7':'JULIO','8':'AGOSTO','9':'SEPTIEMBRE','10':'OCTUBRE','11':'NOVIEMBRE','12':'DICIEMBRE' }	
 	mes = meses[id_mes]	
-	
+	no_tiene=False
+
 	reporte_validar = Reporte_Mensual.objects.filter(mes= mes,usuario__id= request.user.id )
 	user = User.objects.get(id= request.user.id )
 	usuarios_area= User.objects.filter(user_profile__area=user.user_profile.area)	
+	if user.user_profile.area=='No tiene':
+		no_tiene=True
 	#nombre_adjunto = ""	
-	ctx={'reporte_validar':reporte_validar, 'mes':mes, 'user':user, 'usuarios_area':usuarios_area}
+	ctx={'reporte_validar':reporte_validar, 'mes':mes, 'user':user, 'usuarios_area':usuarios_area, 'no_tiene':no_tiene}
 
 	return render(request, 'usuarios/reportes.html',ctx) 	
 
