@@ -33,6 +33,11 @@ AREA=(
 	('Soldadura ','Soldadura '),
 	('Virtualismo','Virtualismo'),
 	('Tecnico en sistemas','Tecnico en sistemas'),	
+	('Electricidad Tecnico','Electricidad Tecnico'),
+	('Aula Movil','Aula Movil'),
+	('Apoyo Pedagodico','Apoyo Pedagodico'),
+	('Santander','Santander'),
+	('CNC','CNC'),
 	('No tiene','No tiene'),
 	)
 
