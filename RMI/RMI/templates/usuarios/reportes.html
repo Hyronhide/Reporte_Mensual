@@ -27,15 +27,272 @@
 							</theader>					
 							<tbody>
 								{% for i in usuarios_area %}
-								<tr>
-									<td>{{ i.first_name }}</td>	
-									<td>{{ i.last_name }}</td>			
-									<td>{{ i.username }}</td>	
-									<td>{{ i.user_profile.telefono }}</td>	
-									<td><a href="/admin_user/{{i.id}}" title="">(Ver Perfil)</a></td>
-									<td><a href="/reportes_lider/{{mes}}/{{i.id}}" title="">(Subir Reporte)</a></td>
-								</tr>
-								{% endfor %}			
+									{% if mes_enero %}
+										{% if i.user_profile.enero %}
+											<tr class="teal lighten-5">
+												<td>{{ i.first_name }}</td>	
+												<td>{{ i.last_name }}</td>			
+												<td>{{ i.username }}</td>	
+												<td>{{ i.user_profile.telefono }}</td>	
+												<td><a href="/admin_user/{{i.id}}" title="">(Ver Perfil)</a></td>
+												<td><a href="/reportes_lider/{{mes}}/{{i.id}}" title="">(Subir Reporte)</a></td>
+											</tr>
+										{% else %}	
+											<tr>
+												<td>{{ i.first_name }}</td>	
+												<td>{{ i.last_name }}</td>			
+												<td>{{ i.username }}</td>	
+												<td>{{ i.user_profile.telefono }}</td>	
+												<td><a href="/admin_user/{{i.id}}" title="">(Ver Perfil)</a></td>
+												<td><a href="/reportes_lider/{{mes}}/{{i.id}}" title="">(Subir Reporte)</a></td>
+											</tr>		
+										{% endif %}									
+									{% endif %}	
+
+									{% if mes_febrero %}
+										{% if i.user_profile.febrero %}
+											<tr class="teal lighten-5">
+												<td>{{ i.first_name }}</td>	
+												<td>{{ i.last_name }}</td>			
+												<td>{{ i.username }}</td>	
+												<td>{{ i.user_profile.telefono }}</td>	
+												<td><a href="/admin_user/{{i.id}}" title="">(Ver Perfil)</a></td>
+												<td><a href="/reportes_lider/{{mes}}/{{i.id}}" title="">(Subir Reporte)</a></td>
+											</tr>
+										{% else %}	
+											<tr>
+												<td>{{ i.first_name }}</td>	
+												<td>{{ i.last_name }}</td>			
+												<td>{{ i.username }}</td>	
+												<td>{{ i.user_profile.telefono }}</td>	
+												<td><a href="/admin_user/{{i.id}}" title="">(Ver Perfil)</a></td>
+												<td><a href="/reportes_lider/{{mes}}/{{i.id}}" title="">(Subir Reporte)</a></td>
+											</tr>		
+										{% endif %}									
+									{% endif %}	
+
+									{% if mes_marzo %}
+										{% if i.user_profile.marzo %}
+											<tr class="teal lighten-5">
+												<td>{{ i.first_name }}</td>	
+												<td>{{ i.last_name }}</td>			
+												<td>{{ i.username }}</td>	
+												<td>{{ i.user_profile.telefono }}</td>	
+												<td><a href="/admin_user/{{i.id}}" title="">(Ver Perfil)</a></td>
+												<td><a href="/reportes_lider/{{mes}}/{{i.id}}" title="">(Subir Reporte)</a></td>
+											</tr>
+										{% else %}	
+											<tr>
+												<td>{{ i.first_name }}</td>	
+												<td>{{ i.last_name }}</td>			
+												<td>{{ i.username }}</td>	
+												<td>{{ i.user_profile.telefono }}</td>	
+												<td><a href="/admin_user/{{i.id}}" title="">(Ver Perfil)</a></td>
+												<td><a href="/reportes_lider/{{mes}}/{{i.id}}" title="">(Subir Reporte)</a></td>
+											</tr>		
+										{% endif %}									
+									{% endif %}	
+
+									{% if mes_abril %}
+										{% if i.user_profile.abril %}
+											<tr class="teal lighten-5">
+												<td>{{ i.first_name }}</td>	
+												<td>{{ i.last_name }}</td>			
+												<td>{{ i.username }}</td>	
+												<td>{{ i.user_profile.telefono }}</td>	
+												<td><a href="/admin_user/{{i.id}}" title="">(Ver Perfil)</a></td>
+												<td><a href="/reportes_lider/{{mes}}/{{i.id}}" title="">(Subir Reporte)</a></td>
+											</tr>
+										{% else %}	
+											<tr>
+												<td>{{ i.first_name }}</td>	
+												<td>{{ i.last_name }}</td>			
+												<td>{{ i.username }}</td>	
+												<td>{{ i.user_profile.telefono }}</td>	
+												<td><a href="/admin_user/{{i.id}}" title="">(Ver Perfil)</a></td>
+												<td><a href="/reportes_lider/{{mes}}/{{i.id}}" title="">(Subir Reporte)</a></td>
+											</tr>		
+										{% endif %}									
+									{% endif %}	
+
+									{% if mes_mayo %}
+										{% if i.user_profile.mayo %}
+											<tr class="teal lighten-5">
+												<td>{{ i.first_name }}</td>	
+												<td>{{ i.last_name }}</td>			
+												<td>{{ i.username }}</td>	
+												<td>{{ i.user_profile.telefono }}</td>	
+												<td><a href="/admin_user/{{i.id}}" title="">(Ver Perfil)</a></td>
+												<td><a href="/reportes_lider/{{mes}}/{{i.id}}" title="">(Subir Reporte)</a></td>
+											</tr>
+										{% else %}	
+											<tr>
+												<td>{{ i.first_name }}</td>	
+												<td>{{ i.last_name }}</td>			
+												<td>{{ i.username }}</td>	
+												<td>{{ i.user_profile.telefono }}</td>	
+												<td><a href="/admin_user/{{i.id}}" title="">(Ver Perfil)</a></td>
+												<td><a href="/reportes_lider/{{mes}}/{{i.id}}" title="">(Subir Reporte)</a></td>
+											</tr>		
+										{% endif %}									
+									{% endif %}	
+
+									{% if mes_junio %}
+										{% if i.user_profile.junio %}
+											<tr class="teal lighten-5">
+												<td>{{ i.first_name }}</td>	
+												<td>{{ i.last_name }}</td>			
+												<td>{{ i.username }}</td>	
+												<td>{{ i.user_profile.telefono }}</td>	
+												<td><a href="/admin_user/{{i.id}}" title="">(Ver Perfil)</a></td>
+												<td><a href="/reportes_lider/{{mes}}/{{i.id}}" title="">(Subir Reporte)</a></td>
+											</tr>
+										{% else %}	
+											<tr>
+												<td>{{ i.first_name }}</td>	
+												<td>{{ i.last_name }}</td>			
+												<td>{{ i.username }}</td>	
+												<td>{{ i.user_profile.telefono }}</td>	
+												<td><a href="/admin_user/{{i.id}}" title="">(Ver Perfil)</a></td>
+												<td><a href="/reportes_lider/{{mes}}/{{i.id}}" title="">(Subir Reporte)</a></td>
+											</tr>		
+										{% endif %}									
+									{% endif %}	
+
+									{% if mes_julio %}
+										{% if i.user_profile.julio %}
+											<tr class="teal lighten-5">
+												<td>{{ i.first_name }}</td>	
+												<td>{{ i.last_name }}</td>			
+												<td>{{ i.username }}</td>	
+												<td>{{ i.user_profile.telefono }}</td>	
+												<td><a href="/admin_user/{{i.id}}" title="">(Ver Perfil)</a></td>
+												<td><a href="/reportes_lider/{{mes}}/{{i.id}}" title="">(Subir Reporte)</a></td>
+											</tr>
+										{% else %}	
+											<tr>
+												<td>{{ i.first_name }}</td>	
+												<td>{{ i.last_name }}</td>			
+												<td>{{ i.username }}</td>	
+												<td>{{ i.user_profile.telefono }}</td>	
+												<td><a href="/admin_user/{{i.id}}" title="">(Ver Perfil)</a></td>
+												<td><a href="/reportes_lider/{{mes}}/{{i.id}}" title="">(Subir Reporte)</a></td>
+											</tr>		
+										{% endif %}									
+									{% endif %}	
+
+									{% if mes_agosto %}
+										{% if i.user_profile.agosto %}
+											<tr class="teal lighten-5">
+												<td>{{ i.first_name }}</td>	
+												<td>{{ i.last_name }}</td>			
+												<td>{{ i.username }}</td>	
+												<td>{{ i.user_profile.telefono }}</td>	
+												<td><a href="/admin_user/{{i.id}}" title="">(Ver Perfil)</a></td>
+												<td><a href="/reportes_lider/{{mes}}/{{i.id}}" title="">(Subir Reporte)</a></td>
+											</tr>
+										{% else %}	
+											<tr>
+												<td>{{ i.first_name }}</td>	
+												<td>{{ i.last_name }}</td>			
+												<td>{{ i.username }}</td>	
+												<td>{{ i.user_profile.telefono }}</td>	
+												<td><a href="/admin_user/{{i.id}}" title="">(Ver Perfil)</a></td>
+												<td><a href="/reportes_lider/{{mes}}/{{i.id}}" title="">(Subir Reporte)</a></td>
+											</tr>		
+										{% endif %}									
+									{% endif %}	
+
+									{% if mes_septiembre %}
+										{% if i.user_profile.septiembre %}
+											<tr class="teal lighten-5">
+												<td>{{ i.first_name }}</td>	
+												<td>{{ i.last_name }}</td>			
+												<td>{{ i.username }}</td>	
+												<td>{{ i.user_profile.telefono }}</td>	
+												<td><a href="/admin_user/{{i.id}}" title="">(Ver Perfil)</a></td>
+												<td><a href="/reportes_lider/{{mes}}/{{i.id}}" title="">(Subir Reporte)</a></td>
+											</tr>
+										{% else %}	
+											<tr>
+												<td>{{ i.first_name }}</td>	
+												<td>{{ i.last_name }}</td>			
+												<td>{{ i.username }}</td>	
+												<td>{{ i.user_profile.telefono }}</td>	
+												<td><a href="/admin_user/{{i.id}}" title="">(Ver Perfil)</a></td>
+												<td><a href="/reportes_lider/{{mes}}/{{i.id}}" title="">(Subir Reporte)</a></td>
+											</tr>		
+										{% endif %}									
+									{% endif %}	
+
+									{% if mes_octubre %}
+										{% if i.user_profile.octubre %}
+											<tr class="teal lighten-5">
+												<td>{{ i.first_name }}</td>	
+												<td>{{ i.last_name }}</td>			
+												<td>{{ i.username }}</td>	
+												<td>{{ i.user_profile.telefono }}</td>	
+												<td><a href="/admin_user/{{i.id}}" title="">(Ver Perfil)</a></td>
+												<td><a href="/reportes_lider/{{mes}}/{{i.id}}" title="">(Subir Reporte)</a></td>
+											</tr>
+										{% else %}	
+											<tr>
+												<td>{{ i.first_name }}</td>	
+												<td>{{ i.last_name }}</td>			
+												<td>{{ i.username }}</td>	
+												<td>{{ i.user_profile.telefono }}</td>	
+												<td><a href="/admin_user/{{i.id}}" title="">(Ver Perfil)</a></td>
+												<td><a href="/reportes_lider/{{mes}}/{{i.id}}" title="">(Subir Reporte)</a></td>
+											</tr>		
+										{% endif %}									
+									{% endif %}	
+
+									{% if mes_noviembre %}
+										{% if i.user_profile.noviembre %}
+											<tr class="teal lighten-5">
+												<td>{{ i.first_name }}</td>	
+												<td>{{ i.last_name }}</td>			
+												<td>{{ i.username }}</td>	
+												<td>{{ i.user_profile.telefono }}</td>	
+												<td><a href="/admin_user/{{i.id}}" title="">(Ver Perfil)</a></td>
+												<td><a href="/reportes_lider/{{mes}}/{{i.id}}" title="">(Subir Reporte)</a></td>
+											</tr>
+										{% else %}	
+											<tr>
+												<td>{{ i.first_name }}</td>	
+												<td>{{ i.last_name }}</td>			
+												<td>{{ i.username }}</td>	
+												<td>{{ i.user_profile.telefono }}</td>	
+												<td><a href="/admin_user/{{i.id}}" title="">(Ver Perfil)</a></td>
+												<td><a href="/reportes_lider/{{mes}}/{{i.id}}" title="">(Subir Reporte)</a></td>
+											</tr>		
+										{% endif %}									
+									{% endif %}	
+
+									{% if mes_diciembre %}
+										{% if i.user_profile.diciembre %}
+											<tr class="teal lighten-5">
+												<td>{{ i.first_name }}</td>	
+												<td>{{ i.last_name }}</td>			
+												<td>{{ i.username }}</td>	
+												<td>{{ i.user_profile.telefono }}</td>	
+												<td><a href="/admin_user/{{i.id}}" title="">(Ver Perfil)</a></td>
+												<td><a href="/reportes_lider/{{mes}}/{{i.id}}" title="">(Subir Reporte)</a></td>
+											</tr>
+										{% else %}	
+											<tr>
+												<td>{{ i.first_name }}</td>	
+												<td>{{ i.last_name }}</td>			
+												<td>{{ i.username }}</td>	
+												<td>{{ i.user_profile.telefono }}</td>	
+												<td><a href="/admin_user/{{i.id}}" title="">(Ver Perfil)</a></td>
+												<td><a href="/reportes_lider/{{mes}}/{{i.id}}" title="">(Subir Reporte)</a></td>
+											</tr>		
+										{% endif %}									
+									{% endif %}	
+
+											
+								{% endfor %}		
 							</tbody>							
 						</table>
 											

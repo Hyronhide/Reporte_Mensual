@@ -332,16 +332,68 @@ def instructores_view(request,pagina):
 ########################### SUBIR REPORTES POR MESES ##################################################
 def reportes_view(request, id_mes):
 	meses = { '1':'ENERO', '2':'FEBRERO', '3':'MARZO', '4':'ABRIL', '5':'MAYO','6':'JUNIO','7':'JULIO','8':'AGOSTO','9':'SEPTIEMBRE','10':'OCTUBRE','11':'NOVIEMBRE','12':'DICIEMBRE' }	
-	mes = meses[id_mes]	
+	mes = meses[id_mes]		
 	no_tiene=False
+	mes_enero=False
+	mes_febrero=False
+	mes_marzo=False
+	mes_mayo=False
+	mes_abril=False
+	mes_junio=False
+	mes_julio=False
+	mes_agosto=False
+	mes_septiembre=False
+	mes_octubre=False
+	mes_noviembre=False
+	mes_diciembre=False
+
+	if mes=='ENERO':
+		mes_enero=True
+	elif mes=='FEBRERO':
+		mes_febrero=True
+	elif mes=='MARZO':
+		mes_marzo=True
+	elif mes=='ABRIL':
+		mes_abril=True
+	elif mes=='MAYO':
+		mes_mayo=True		
+	elif mes=='JUNIO':
+		mes_junio=True
+	elif mes=='JULIO':
+		mes_julio=True
+	elif mes=='AGOSTO':
+		mes_agosto=True
+	elif mes=='SEPTIEMBRE':
+		mes_septiembre=True
+	elif mes=='OCTUBRE':
+		mes_octubre=True
+	elif mes=='NOVIEMBRE':
+		mes_noviembre=True
+	elif mes=='DICIEMBRE':
+		mes_diciembre=True
 
 	reporte_validar = Reporte_Mensual.objects.filter(mes= mes,usuario__id= request.user.id )
 	user = User.objects.get(id= request.user.id )
+	area = user.user_profile.area
+	reportes = Reporte_Mensual.objects.filter(mes= mes,usuario__user_profile__area=area)	
 	usuarios_area= User.objects.filter(user_profile__area=user.user_profile.area)	
 	if user.user_profile.area=='No tiene':
 		no_tiene=True
 	#nombre_adjunto = ""	
-	ctx={'reporte_validar':reporte_validar, 'mes':mes, 'user':user, 'usuarios_area':usuarios_area, 'no_tiene':no_tiene}
+	ctx={'reporte_validar':reporte_validar, 'mes':mes, 'user':user, 'usuarios_area':usuarios_area, 'no_tiene':no_tiene, 'reportes':reportes,
+		'mes_enero':mes_enero,
+		'mes_febrero':mes_febrero,
+		'mes_marzo':mes_marzo,
+		'mes_mayo':mes_mayo,
+		'mes_abril':mes_abril,
+		'mes_junio':mes_junio,
+		'mes_julio':mes_julio,
+		'mes_agosto':mes_agosto,
+		'mes_septiembre':mes_septiembre,
+		'mes_octubre':mes_octubre,
+		'mes_noviembre':mes_noviembre,
+		'mes_diciembre':mes_diciembre
+		}
 
 	return render(request, 'usuarios/reportes.html',ctx) 	
 
