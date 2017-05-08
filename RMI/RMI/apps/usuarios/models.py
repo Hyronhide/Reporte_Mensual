@@ -42,6 +42,7 @@ AREA=(
 	('Apoyo Pedagodico','Apoyo Pedagodico'),
 	('Santander','Santander'),
 	('CNC','CNC'),
+	('Artesanias', 'Artesanias'),
 	('No tiene','No tiene'),	
 	)
 
