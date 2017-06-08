@@ -27,7 +27,7 @@
 	 </nav>  
 
 	<div class="container">
-	<div align="center">
+	<div class= "row" align="center">
 	<h4>Subir Informacion</h4>
 	</div>
 
@@ -38,21 +38,203 @@
 		Formato de  Hora 19:00 (Hora Militar)
 	</div>	
 	{% if info %}
-				
 		<div class="card-panel lime center">
-		<h5 class ="">{{info}}
-		<a href="{% url 'comision' %}" class="btn btn-floating  orange"><i class="material-icons">skip_previous</i></a>
+			<h5 class ="">{{info}}
+			<a href="{% url 'comision' %}" class="btn btn-floating  orange"><i class="material-icons">skip_previous</i></a>
 		</h5>
 		</div>
 	{% endif %}	
-	<div class="col s6 offset-s3 m6 offset-m3">
-		<div class="card-panel">
-			<form method="POST" class="" enctype = "multipart/form-data" align="center">
-				{% csrf_token %}
-				{{ form_Com.as_p }}
-				
-				<button type="submit" class="save btn btn-default gr een darken-4">Guardar Resultados</button>
-			</form>
+	<div class="row">
+		<div class="col s12 m12 l12" >
+			<div class="card-panel">
+				<form method="POST" class="container" enctype = "multipart/form-data" align="">
+					{% csrf_token %}
+						<div class="">
+						<div class="teal darken-1 col s12 m12  l10 offset-l1" align="center">
+							<span class="white-text" >
+									<h5>
+									Datos del  Comisionado
+									</h5>
+							</span>
+						</div>
+						<div class="card-panel  col s12 m12  l10 offset-l1">
+						
+						{{ form_Com.nombres_comisionado.errors }}
+						{{ form_Com.nombres_comisionado.label }}
+						{{ form_Com.nombres_comisionado }}
+						
+						{{ form_Com.identificacion.errors }}
+						{{ form_Com.identificacion.label }}
+						{{ form_Com.identificacion }}
+						
+						{{ form_Com.celular.errors }}
+						{{ form_Com.celular.label }}
+						{{ form_Com.celular }}
+						
+						{{ form_Com.email.errors }}
+						{{ form_Com.email.label }}
+						{{ form_Com.email }}
+						
+						{{ form_Com.fecha_de_nacimiento.errors }}
+						{{ form_Com.fecha_de_nacimiento.label }}
+						{{ form_Com.fecha_de_nacimiento }}
+						
+						{{ form_Com.firma.errors }}
+						{{ form_Com.firma.label }}
+						{{ form_Com.firma }}
+						</div>
+					</div>
+
+						<div class="teal darken-1 col s12 m12  l10 offset-l1" align="center">
+							<span class="white-text" >
+									<h5>
+									Cuenta Bancaria
+									</h5>
+							</span>
+						</div>
+					<div class="card-panel  col s12 m6 offset-m6 l10 offset-l1">
+						<div>
+							
+						{{ form_Com.tipo_cuentaerrorslabel							
+						{{ form_Com.tipo_cuenta.label }}
+						{{ form_Com.tipo_cuenta }}
+						
+						{{ form_Com.numero_cuenta.errors }}
+						{{ form_Com.numero_cuenta.label }}
+						{{ form_Com.numero_cuenta }}
+						
+						{{ form_Com.banco.errors }}
+						{{ form_Com.banco.label }}
+						{{ form_Com.banco }}
+						</div>
+					</div>
+
+						<div class="teal darken-1 col s12 m12  l10 offset-l1" align="center">
+							<span class="white-text" >
+									<h5>
+									Vinculación laboral
+									</h5>
+							</span>
+						</div>
+					<div class="card-panel  col s12 m6 offset-m6 l10 offset-l1">
+						<div>
+						
+						{{ form_Com.tipo_vinculacion.errors }}
+						{{ form_Com.tipo_vinculacion.label }}
+						{{ form_Com.tipo_vinculacion }}
+						
+						{{ form_Com.numero_contrato.errors }}
+						{{ form_Com.numero_contrato.label }}
+						{{ form_Com.numero_contrato }}
+						
+						{{ form_Com.objeto_contractual.errors }}
+						{{ form_Com.objeto_contractual.label }}
+						{{ form_Com.objeto_contractual }}
+						
+						{{ form_Com.vencimiento_contrato.errors }}
+						{{ form_Com.vencimiento_contrato.label }}
+						{{ form_Com.vencimiento_contrato }}
+						
+						{{ form_Com.asignacion_mensual.errors }}
+						{{ form_Com.asignacion_mensual.label }}
+						{{ form_Com.asignacion_mensual }}
+						</div>
+					</div>
+					
+						<div class="teal darken-1 col s12 m12  l10 offset-l1" align="center">
+							<span class="white-text" >
+									<h5>
+										Si es de Planta ingrese el Grado 
+									</h5>
+							</span>
+						</div>
+					<div class="card-panel  col s12 m6 offset-m6 l10 offset-l1">
+						<div>
+						
+						{{ form_Com.grado.errors }}
+						{{ form_Com.grado.label }}
+						{{ form_Com.grado }}
+						</div>
+					</div>
+
+						<div class="teal darken-1 col s12 m12  l10 offset-l1" align="center">
+							<span class="white-text" >
+									<h5>
+									Datos del Supervisor de Contrato
+									</h5>
+							</span>
+						</div>
+					<div class="card-panel  col s12 m6 offset-m6 l10 offset-l1">
+						<div>
+						
+						{{ form_Com.supervisor.errors }}
+						{{ form_Com.supervisor.label }}
+						{{ form_Com.supervisor }}
+						
+						{{ form_Com.cargo.errors }}
+						{{ form_Com.cargo.label }}
+						{{ form_Com.cargo }}
+						</div>
+					</div>
+
+						<div class="teal darken-1 col s12 m12  l10 offset-l1" align="center">
+							<span class="white-text" >
+									<h5>
+									Datos de la Regional
+									</h5>
+
+							</span>
+						</div>
+					<div class="card-panel  col s12 m6 offset-m6 l10 offset-l1">
+						<div>
+						
+						{{ form_Com.regional.errors }}
+						{{ form_Com.regional.label }}
+						{{ form_Com.regional }}
+						
+						{{ form_Com.centro.errors }}
+						{{ form_Com.centro.label }}
+						{{ form_Com.centro }}
+						</div>
+					</div>
+
+
+						<div class="teal darken-1 col s12 m12  l10 offset-l1" align="center">
+							<span class="white-text" >
+									<h5>
+									Datos del Tiquete
+									</h5>
+							</span>
+						</div>
+					<div class="card-panel  col s12 m6 offset-m6 l10 offset-l1">
+						<div>
+						
+						{{ form_Com.ciudad_origen.errors }}
+						{{ form_Com.ciudad_origen.label }}
+						{{ form_Com.ciudad_origen }}
+						
+						{{ form_Com.ida_fecha_salida.errors }}
+						{{ form_Com.ida_fecha_salida.label }}
+						{{ form_Com.ida_fecha_salida }}
+						
+						{{ form_Com.ida_hora_salida.errors }}
+						{{ form_Com.ida_hora_salida.label }}
+						{{ form_Com.ida_hora_salida }}
+						
+						{{ form_Com.regreso_fecha_partida.errors }}
+						{{ form_Com.regreso_fecha_partida.label }}
+						{{ form_Com.regreso_fecha_partida }}
+						
+						{{ form_Com.regreso_hora_partida.errors }}
+						{{ form_Com.regreso_hora_partida.label }}
+						{{ form_Com.regreso_hora_partida }}
+						</div>
+					</div>
+					<div align='center'>
+					<button type="submit" class="save btn btn-default gr een darken-4">Guardar Resultados</button>
+					</div>
+				</form>
+			</div>
 		</div>
 	</div>
 	{% for m in messages %}

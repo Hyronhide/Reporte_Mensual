@@ -41,7 +41,6 @@ class Comision (models.Model):
 	
 	supervisor 			= models.CharField(max_length=500)
 	cargo 				= models.CharField(max_length=500)
-	ciudad 				= models.CharField(max_length=500)
 	regional 			= models.ForeignKey(Regional)
 	centro  			= models.CharField(max_length=500)
 
@@ -51,8 +50,13 @@ class Comision (models.Model):
 	regreso_fecha_partida 	= models.DateField()
 	regreso_hora_partida 	= models.TimeField()
 
+
+	def clean(self):
+		if self.regreso_fecha_partida:
+			if self.ida_fecha_salida > self.ida_fecha_salida and self.ida_fecha_salida > self.fecha_de_nacimiento:
+				raise ValidationError('La fecha de inicio no puede ser mayor a la fecha de fin')
+
 	def __unicode__(self):
 		return self.nombres_comisionado
-
 
 
