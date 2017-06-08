@@ -42,7 +42,7 @@ class Comision (models.Model):
 	supervisor 			= models.CharField(max_length=500)
 	cargo 				= models.CharField(max_length=500)
 	ciudad 				= models.CharField(max_length=500)
-	regional 			= models.CharField(max_length=500)
+	regional 			= models.ForeignKey(Regional)
 	centro  			= models.CharField(max_length=500)
 
 	ciudad_origen 			= models.CharField(max_length=500)
