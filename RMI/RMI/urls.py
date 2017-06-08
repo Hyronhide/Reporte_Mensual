@@ -22,6 +22,8 @@ import settings
 
 urlpatterns = [
 	url(r'', include('RMI.apps.usuarios.urls')),
+    url(r'', include('RMI.apps.comision.urls')),
+
     #url(r'^media/(?P<path>.*)$','django.views.static.serve',{'document_root':settings.MEDIA_ROOT}),	
 	url(r'^admin/doc/', include('django.contrib.admindocs.urls')), 
     url(r'^admin/', admin.site.urls),    
