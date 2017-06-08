@@ -1,0 +1,82 @@
+<html>
+<head>
+	<title>
+	Importar
+	</title>
+
+	<link rel="stylesheet" type="text/css" href="/media/css/materialize.min.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta charset="UTF-8">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+		<meta charset="utf-8">
+</head>
+<body>
+
+	<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+	<script type="text/javascript" src="/media/js/materialize.min.js"></script>
+	 <nav class="teal darken-1" role="navigation">
+		
+		<img src="/media/images/Logos-sena-blanco.png" width="110px" height="70px" float="left">
+		<a  href="{% url 'vista_index' %}" class="brand-logo hide-on-med-and-down" float="left"><font size="5">Reporte Mensual Instructor</font></a>		
+		  <ul class="right ">
+		  	<li>
+		  		<a  href="{% url 'vista_index' %}">Inicio</a></li>
+		  		<li><a  href="{% url 'comision' %}">Generar comision</a></li>
+		  	</ul>		  
+		
+	 </nav>  
+
+	<div class="container">
+	<div align="center">
+	<h4>Subir Informacion</h4>
+	</div>
+
+
+	<div class="card">
+		Formato de  Fecha Año-Mes-Dia
+		<br>
+		Formato de  Hora 19:00 (Hora Militar)
+	</div>	
+	{% if info %}
+				
+		<div class="card-panel lime center">
+		<h5 class ="">{{info}}
+		<a href="{% url 'comision' %}" class="btn btn-floating  orange"><i class="material-icons">skip_previous</i></a>
+		</h5>
+		</div>
+	{% endif %}	
+	<div class="col s6 offset-s3 m6 offset-m3">
+		<div class="card-panel">
+			<form method="POST" class="" enctype = "multipart/form-data" align="center">
+				{% csrf_token %}
+				{{ form_Com.as_p }}
+				
+				<button type="submit" class="save btn btn-default gr een darken-4">Guardar Resultados</button>
+			</form>
+		</div>
+	</div>
+	{% for m in messages %}
+		{{m}}
+	{% endfor %}
+
+	</div>
+<script>
+	$(document).ready(function(){
+		$('select').material_select();
+		
+		//$('select').not('.disabled').material_select();
+		//$('select:not([multiple])').material_select();
+		$(".button-collapse").sideNav();
+		$('.modal-trigger').leanModal();
+		$('ul.tabs').tabs();
+		$('ul.tabs').tabs('select_tab', 'tab_id');
+		$('.datepicker').pickadate({
+		    selectMonths: true, // Creates a dropdown to control month
+		    selectYears: 15 // Creates a dropdown of 15 years to control year
+		  });
+			});
+		$('.parallax').parallax();
+
+</script>
+</body>
+</html>

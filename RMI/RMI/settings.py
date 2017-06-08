@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles', 
     'RMI.apps.usuarios',
+    'RMI.apps.comision',
     'gunicorn',
     
 ]
