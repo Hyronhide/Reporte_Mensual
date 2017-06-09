@@ -14,9 +14,10 @@ def comision_view (request):
 				
 			except:
 				info = "Debe completar todos los campos" 
+		else:		
+			info = "Debe completar todos los campos" 
 	if request.method == "GET":
 		form_Com = Comision_form()
-		
 
 	return render (request,'comision/comision.html',locals())
 
