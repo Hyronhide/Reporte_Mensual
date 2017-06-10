@@ -14,11 +14,7 @@ def comision_view (request):
 				i = form_Com.save(commit = False)
 				i.save()
 				info = "Informacion Guardada con Exito!" 
-				mail = EmailMessage('Asunto', 'Texto', 'serviciosdocumentosctpi@gmail.com','dfprado4@misena.edu.co' )
-				#mail.attach(i.firma)
-				#mail.attach(firma.name, firma.read(), firma.content_type)
-				mail.attach_file(firma.name, firma.read(), firma.content_type)
-				mail.send()
+
 			except:
 				info = "Debe completar todos los campos" 
 		else:		
