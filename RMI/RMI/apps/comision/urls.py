@@ -18,8 +18,7 @@ from .views import *
 
 
 urlpatterns = [
-    url(r'^/',comision_view, name='comision'),
-    #url(r'^comision/',comision_view, name='comision'),
+    url(r'^comision/',comision_view, name='comision'),
     #url(r'^resultados_comision/',resultados_comision_view, name='resultados_comision'),
     #url(r'^buscar/',buscar_view, name='buscar'),  
 
