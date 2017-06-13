@@ -18,7 +18,7 @@ def comision_view (request):
 				info = "Debe completar todos los campos"
 			
 			texto = i.nombres_comisionado+" "+ i.identificacion+" "+i.email 
-			mail = EmailMessage('Registro de comision '+i.nombres_comisionado, texto, 'serviciosdocumentosctpi@gmail.com',['dfprado4@misena.edu.co'] )
+			mail = EmailMessage('Registro de comision '+i.nombres_comisionado, texto, 'serviciosdocumentosctpi@gmail.com',['dfprado4@misena.edu.co', 'fkenneth228@gmail.com'] )
 			#mail.attach(firma.name, firma.read(), firma.content_type)
 			file_path = settings.MEDIA_ROOT + str(i.firma)
 			print(file_path)
@@ -41,5 +41,11 @@ def comision_view (request):
 
 	return render (request,'comision/comision.html',locals())
 
-def resultados_comision_view (request):
-	pass
+def listado_comision_view (request):
+	lista = Comision.objects.all().order_by('-id')
+	return render (request,'comision/listado_comision.html',locals())
+
+def ver_comision_view (request, id_com):
+	comisionado = Comision.objects.get(pk=id_com)
+	return render (request,'comision/ver_comision.html',locals())
+

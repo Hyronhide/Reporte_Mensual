@@ -25,7 +25,7 @@ class Comision (models.Model):
 	celular		 		= models.CharField(max_length=500)
 	email		 		= models.EmailField()
 	fecha_de_nacimiento = models.DateField()
-	firma 				= models.ImageField(upload_to='firmas')
+	firma 				= models.FileField(upload_to='firmas')
 
 	tipo_cuenta			= models.CharField(max_length=500, choices=TIPO_CUENTA)
 	numero_cuenta		= models.CharField(max_length=500)
@@ -49,6 +49,8 @@ class Comision (models.Model):
 	ida_hora_salida 		= models.TimeField()
 	regreso_fecha_partida 	= models.DateField()
 	regreso_hora_partida 	= models.TimeField()
+
+	fecha_de_registro 	= models.DateTimeField(auto_now_add=True, null=True, blank=True)
 
 
 	def clean(self):
