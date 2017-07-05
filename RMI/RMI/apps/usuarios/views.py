@@ -443,7 +443,7 @@ def reportes_lider_view(request, mes, id_user):
 			user.user_profile.save()
 			#to_admin = 'lgonzalez21@misena.edu.co'
 			to_admin = 'fkenneth228@gmail.com'
-			to_admin_2 = 'alexandrajr@misena.edu.co'
+			to_admin_2 = 'ycortega3@misena.edu.co'
 			to_admin_3 = 'mcperezp@sena.edu.co'
 			#to_user = correo
 			html_content_admin = "<p>El instructor <b>%s %s</b> ha subido un archivo</p><br><p>http://reportemensualinstructor.herokuapp.com%s</p>"%(user.first_name,user.last_name,reporte.adjunto_exel.url)
