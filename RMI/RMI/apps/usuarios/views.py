@@ -442,7 +442,7 @@ def reportes_lider_view(request, mes, id_user):
 
 			user.user_profile.save()
 			#to_admin = 'lgonzalez21@misena.edu.co'
-			to_admin = 'fkenneth228@gmail.com'
+			to_admin = 'mjbetancur3@gmail.com'
 			to_admin_2 = 'ycortega3@misena.edu.co'
 			to_admin_3 = 'mcperezp@sena.edu.co'
 			#to_user = correo
