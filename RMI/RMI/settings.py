@@ -180,5 +180,5 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 's3naaltocauca@gmail.com'
 EMAIL_HOST_PASSWORD = 'sena1234'
-DEFAUT_FROM_EMAIL = 's3naaltocauca@gmail.com'
+DEFAUT_FROM_EMAIL = 's3nanorte@gmail.com'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
